@@ -1,0 +1,13 @@
+export const LOGIN="v1/login"
+export const DASHBOARD="v1/dashboard"
+export const HOME = 'v1/home';
+export const WATCH_LIST = 'v1/watch-list';
+export const PORTFOLIO = 'v1/portfolio';
+export const ACCOUNT_DETAILS = 'v1/account-details';
+export const ORDERS = 'v1/orders';
+export const STOCK_CHART = 'v1/stock-chart';
+export const WELCOME = 'v1/welcome';
+export const STOCK_SEARCH = 'v1/stock-search';
+export const ACCOUNT_FUNDS = 'v1/account-funds';
+export const ACCOUNT_PROFILE = 'v1/account-profile';
+export const ACCOUNT_SETTING = 'v1/account-setting';
