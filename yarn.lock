@@ -1168,6 +1168,16 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@breeffy/react-native-bottom-sheet@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@breeffy/react-native-bottom-sheet/-/react-native-bottom-sheet-0.4.0.tgz#17d6a92ea2aaf40f1db87dc41a06737e33fdb051"
+  integrity sha512-g/TXu5ruZ0lThTeqacGPljbNd4xOxOF78+EitmLtxa1MtD6dInefmZV71siGjAiKsqp9z8b/Q9egxESdPROaQg==
+  dependencies:
+    invariant "^2.2.4"
+    lodash.isequal "^4.5.0"
+    react-native-redash "^15.11.1"
+    remeda "^0.0.27"
+
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
@@ -1206,21 +1216,6 @@
   version "8.41.0"
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.41.0.tgz#080321c3b68253522f7646b55b577dd99d2950b3"
   integrity sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==
-
-"@gorhom/bottom-sheet@^4":
-  version "4.4.7"
-  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.4.7.tgz#fc80b3f0b7ebab056ce226f3aa3a89b2db8660dd"
-  integrity sha512-ukTuTqDQi2heo68hAJsBpUQeEkdqP9REBcn47OpuvPKhdPuO1RBOOADjqXJNCnZZRcY+HqbnGPMSLFVc31zylQ==
-  dependencies:
-    "@gorhom/portal" "1.0.14"
-    invariant "^2.2.4"
-
-"@gorhom/portal@1.0.14":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@gorhom/portal/-/portal-1.0.14.tgz#1953edb76aaba80fb24021dc774550194a18e111"
-  integrity sha512-MXyL4xvCjmgaORr/rtryDNFy3kU4qUbKlwtQqqsygd0xX3mhKjOLn6mQK8wfu0RkoE0pBE0nAasRoHua+/QZ7A==
-  dependencies:
-    nanoid "^3.3.1"
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -5186,6 +5181,11 @@ lodash.debounce@4.0.8, lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+
 lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
@@ -5681,7 +5681,7 @@ ms@2.1.3:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-nanoid@^3.1.23, nanoid@^3.3.1:
+nanoid@^3.1.23:
   version "3.3.6"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.6.tgz#443380c856d6e9f9824267d960b4236ad583ea4c"
   integrity sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==
@@ -6338,6 +6338,15 @@ react-native-reanimated@^3.1.0:
     convert-source-map "^2.0.0"
     invariant "^2.2.4"
 
+react-native-redash@^15.11.1:
+  version "15.11.1"
+  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-15.11.1.tgz#c9a21b20157fb6e0d35337d0dc159371248d78b5"
+  integrity sha512-chQkd9t4gecqEz5Gr7D+bl3q5eG2hhHyadO7QT5l893abLFkRHDGY9YtEGwkR/j050TQl5A1KdxuCJEzxhogQw==
+  dependencies:
+    abs-svg-path "^0.1.1"
+    normalize-svg-path "^1.0.1"
+    parse-svg-path "^0.1.2"
+
 react-native-redash@^16.1.1:
   version "16.3.0"
   resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-16.3.0.tgz#a9112ff1b0e0b506a2e2ae50967597e73b69d343"
@@ -6619,6 +6628,11 @@ regjsparser@^0.9.1:
   integrity sha512-dQUtn90WanSNl+7mQKcXAgZxvUe7Z0SqXlgzv0za4LwiUhyzBC58yQO3liFoUgu8GiJVInAhJjkj1N0EtQ5nkQ==
   dependencies:
     jsesc "~0.5.0"
+
+remeda@^0.0.27:
+  version "0.0.27"
+  resolved "https://registry.yarnpkg.com/remeda/-/remeda-0.0.27.tgz#5924d656c5f8e9c7c692324cd7f4c43ce8552997"
+  integrity sha512-nkQnPLMXtSirvF8OxjuvbZhwBawDD6ZQAvg7hiq4/nZEFIgB4u80fS/NUm6PMJgSUfwfzQ6ZwVyVn8DTJcmkCw==
 
 repeat-element@^1.1.2:
   version "1.1.4"

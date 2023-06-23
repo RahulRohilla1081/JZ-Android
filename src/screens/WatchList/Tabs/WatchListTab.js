@@ -26,7 +26,9 @@ import ImageIcon from '../../../../components/ImageIcon/ImageIcon';
 import Images from '../../../../constants/Images';
 import Icons from '../../../../constants/Icons';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import BottomSheet from '@gorhom/bottom-sheet';
+// import BottomSheet from '@gorhom/bottom-sheet';
+
+import {BottomSheet, SnapPoint} from '@breeffy/react-native-bottom-sheet';
 
 
 
@@ -45,6 +47,20 @@ import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 
 const WatchListTab = (props) => {
+
+   const snapPoints = useMemo(
+    () => [
+      { relativeTo: 'content', percentagesOf: 30 },
+      { relativeTo: 'content', percentagesOf: 70 },
+      { relativeTo: 'content', percentagesOf: 100 }
+    ],
+    []
+  );
+
+  // callbacks
+  const handleSheetChanges = useCallback((index) => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
   const navigation=useNavigation()
   const scrollY = useRef(new Animated.Value(0));
@@ -119,6 +135,7 @@ const WatchListTab = (props) => {
         <TouchableOpacity onPress={()=>{
           // navigation.navigate(STOCK_CHART)
             ShowOptionButtonModal.current.present();
+            // handleSheetChanges();
         }}> 
           <View
             style={{
@@ -181,7 +198,7 @@ const WatchListTab = (props) => {
         key={`tab_${index}`}
         tabLabel={label.Title}
         style={{
-          backgroundColor: COLORS.white,
+       
           flex: 1,
         }}>
         <ScrollView
@@ -199,7 +216,7 @@ const WatchListTab = (props) => {
               ref={ref}
               style={{
                 flex: 1,
-                backgroundColor: COLORS.white,
+            
               }}
               showsVerticalScrollIndicator={false}>
               <View
@@ -327,12 +344,7 @@ const WatchListTab = (props) => {
 
 
 
-      const snapPoints = useMemo(() => ['25%', '50%',], []);
 
-      // callbacks
-      const handleSheetChanges = useCallback((index) => {
-        console.log('handleSheetChanges', index);
-      }, []);
 
 
   const [activeTab, setActiveTab] = useState(0);
@@ -438,24 +450,13 @@ const WatchListTab = (props) => {
         </BottomSheet>
       </GestureHandlerRootView> */}
       <GestureHandlerRootView style={{flex: 1}}>
-        <BottomSheetModalProvider>
-          <View style={styles.container}>
-            {/* <Button
-            onPress={handlePresentModalPress}
-            title="Present Modal"
-            color="black"
-          /> */}
-            <BottomSheetModal
-              ref={ShowOptionButtonModal}
-              index={1}
-              snapPoints={snapPoints}
-              onChange={handleSheetChanges}>
-              <View style={styles.contentContainer}>
-                <Text>Awesome 🎉</Text>
-              </View>
-            </BottomSheetModal>
-          </View>
-        </BottomSheetModalProvider>
+        <BottomSheet
+          ref={ShowOptionButtonModal}
+          initialSnapIndex={1}
+          snapPoints={snapPoints}
+          onChange={handleSheetChanges}>
+          {/* INSERT A SCROLLABLE HERE */}
+        </BottomSheet>
       </GestureHandlerRootView>
     </View>
   );
