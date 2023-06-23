@@ -9,27 +9,34 @@ import {
   Animated,
   ScrollView,
 } from 'react-native';
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import Icons from '../../../constants/Icons';
 import Images from '../../../constants/Images';
 import ImageIcon from '../../../components/ImageIcon/ImageIcon';
 import {FlashList} from '@shopify/flash-list';
-import { COLORS } from '../../utils/Theme/Theme';
-import { color } from '@rneui/base';
-import { ACCOUNT_FUNDS, ACCOUNT_PROFILE, ACCOUNT_SETTING } from '../../utils/Routes/Routes';
-import { useNavigation } from '@react-navigation/native';
+import {COLORS} from '../../utils/Theme/Theme';
+import {color} from '@rneui/base';
+import {
+  ACCOUNT_FUNDS,
+  ACCOUNT_PROFILE,
+  ACCOUNT_SETTING,
+} from '../../utils/Routes/Routes';
+import {useNavigation} from '@react-navigation/native';
+import IconButton from '../../../components/IconButton/IconButton';
 // import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
 
 // import {ScrollView} from 'react-native-gesture-handler';
 
 const Account = () => {
+  const [expanded, setExpanded] = useState(false);
   const scrollY = useRef(new Animated.Value(0));
-  const navigation=useNavigation()
-  const {width} = useWindowDimensions();
+  const navigation = useNavigation();
+  const {height, width} = useWindowDimensions();
   const viewWidth = width - 40;
   const headerHeight = 60 * 2;
+  const animationHeight = useRef(new Animated.Value(0)).current;
   const ref = useRef(null);
   const [UserData, setUserData] = useState({
     name: 'Sakshi',
@@ -37,6 +44,12 @@ const Account = () => {
     email: 'sakshisingh064@gmail.com',
   });
   const profile = UserData.name.slice(0, 2);
+  const [niftyFifty, setNiftyFifty] = useState({
+    value: 18688.1,
+    changeToday: -67.8,
+    changeTodayPercent: -0.36,
+  });
+  const [funds, setFunds] = useState({equity: 10000});
   const accountList = [
     {
       head: 'Account',
@@ -58,6 +71,21 @@ const Account = () => {
   ];
 
   const [tBody, setTBody] = useState(accountList);
+  useEffect(() => {
+    if (expanded) {
+      Animated.timing(animationHeight, {
+        duration: 100,
+        toValue: 0.55 * height,
+        // easing: Easing.linear,
+      }).start();
+    } else {
+      Animated.timing(animationHeight, {
+        duration: 200,
+        toValue: 0,
+        // easing: Easing.linear,
+      }).start();
+    }
+  }, [expanded]);
   const handleScroll = Animated.event(
     [
       {
@@ -92,7 +120,7 @@ const Account = () => {
             paddingTop: 20,
             marginBottom: 20,
             fontWeight: 'bold',
-            color:COLORS.black,
+            color: COLORS.black,
             // fontSize: 17,
           }}>
           {item.head}
@@ -124,9 +152,10 @@ const Account = () => {
             }}
           />
         )}
-        <TouchableOpacity onPress={()=>{
-          navigation.navigate(item.route)
-        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate(item.route);
+          }}>
           <View
             style={{
               flexDirection: 'row',
@@ -186,134 +215,428 @@ const Account = () => {
     );
   };
   return (
-    <View
-      style={{
-        width: width,
-        flex: 1,
-        backgroundColor: '#ebecee',
-        paddingTop: 20,
-      }}>
-      <StatusBar barStyle="dark-content" backgroundColor="#ebecee" />
-      <Animated.View style={[{height: 40, transform: [{translateY}]}]}>
-        <Animated.View
-          style={[
-            {
-              marginLeft: 20,
-              marginRight: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            },
-            {transform: [{translateY}]},
-          ]}>
-          <Text style={{fontSize: 30, fontWeight: 'bold', color: '#373644'}}>
-            Account
-          </Text>
-          <ImageIcon
-            icon={Icons.arrow_down}
-            iconStyle={{
-              height: 30,
-              width: 25,
-            }}
-          />
-        </Animated.View>
-
+    <>
+      <Animated.View
+        style={[
+          {
+            height: animationHeight,
+            backgroundColor: '#e8edeb',
+            padding: expanded ? 20 : null,
+          },
+          // {backgroundColor: 'white'},
+        ]}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: 'bold',
+            color: '#373644', // marginTop: 20,
+          }}>
+          Overview
+        </Text>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+          <View>
+            <Text style={{fontSize: 15, fontWeight: 'bold', marginTop: 40}}>
+              NIFTY 50
+            </Text>
+            <Text style={{fontSize: 20}}>{niftyFifty.value.toFixed(2)}</Text>
+            <Text style={{color: 'red', marginTop: 10}}>
+              {niftyFifty.changeToday} {'      '}
+              {niftyFifty.changeTodayPercent}%
+            </Text>
+            <View style={{marginTop: 20, marginLeft: 20}}>
+              <ImageIcon
+                icon={Icons.line_chart}
+                iconStyle={{
+                  height: 40,
+                  width: 50,
+                }}
+              />
+            </View>
+          </View>
+          <View style={{marginLeft: 75}}>
+            <Text style={{fontSize: 15, fontWeight: 'bold', marginTop: 40}}>
+              NIFTY 50
+            </Text>
+            <Text style={{fontSize: 20}}>{niftyFifty.value.toFixed(2)}</Text>
+            <Text style={{color: 'red', marginTop: 10}}>
+              {niftyFifty.changeToday} {'      '}
+              {niftyFifty.changeTodayPercent}%
+            </Text>
+            <View style={{marginTop: 20, marginLeft: 20}}>
+              <ImageIcon
+                icon={Icons.line_chart}
+                iconStyle={{
+                  height: 40,
+                  width: 50,
+                }}
+              />
+            </View>
+          </View>
+        </View>
+        <Text style={{color: COLORS.gray20, paddingVertical: 30}}>
+          * Charts indicate 52 weeks trend
+        </Text>
         <View
           style={{
-            // marginLeft: 20,
-            // marginRight: 20,
-            marginHorizontal: 20,
-            marginTop: 10,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Text style={{fontSize: 20, color: '#3c3b48'}}>{UserData.name}</Text>
+            backgroundColor: COLORS.gray10,
+            paddingHorizontal: 20,
+            height: 1,
+          }}
+        />
+        <Text style={{paddingVertical: 20, fontWeight: 'bold', fontSize: 15}}>
+          Funds
+        </Text>
+        <Text style={{color: COLORS.gray20}}>Equity</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
           <ImageIcon
-            icon={Icons.notification}
+            icon={Icons.rupee}
             iconStyle={{
-              height: 30,
-              width: 25,
+              height: 25,
+              width: 20,
             }}
           />
+          <Text style={{fontSize: 17, fontWeight: 'bold', marginLeft: -5}}>
+            {Number(funds.equity).toFixed(2)}
+          </Text>
         </View>
       </Animated.View>
-      <Animated.ScrollView
-        onScroll={handleScroll}
-        ref={ref}
-        showsVerticalScrollIndicator={false}>
+
+      {!expanded && (
         <View
           style={{
             width: width,
             flex: 1,
-            backgroundColor: '#ffffff',
-            borderTopRightRadius: 20,
-            borderTopLeftRadius: 20,
-            marginTop: 130,
-            paddingTop: 75,
+            backgroundColor: '#ebecee',
+            paddingTop: 20,
           }}>
-          {/* <FlashList */}
-          <Animated.FlatList
-            // onScroll={handleScroll}
-            // ref={ref}
-            showsVerticalScrollIndicator={false}
-            data={tBody}
-            renderItem={renderHeaderTitle}
-          />
-        </View>
-
-        <Animated.View
-          style={[
-            {
-              position: 'absolute',
-              marginLeft: 20,
-            },
-            // {transform: [{translateY}]},
-          ]}>
-          <View
-            style={{
-              width: viewWidth,
-              height: headerHeight,
-              backgroundColor: '#ffffff',
-              borderRadius: 5,
-              shadowColor: '#171717',
-              shadowOffset: {width: -2, height: 4},
-              shadowOpacity: 0.2,
-              elevation: 15,
-              shadowRadius: 3,
-              padding: 15,
-              marginTop: 60,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <View>
+          <StatusBar barStyle="dark-content" backgroundColor="#ebecee" />
+          <Animated.View style={[{height: 40, transform: [{translateY}]}]}>
+            <Animated.View
+              style={[
+                {
+                  marginLeft: 20,
+                  marginRight: 20,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                },
+                {transform: [{translateY}]},
+              ]}>
               <Text
-                style={{
-                  marginTop: 15,
-                  fontSize: 20,
-                  fontWeight: 'bold',
-                  color: '#41404e',
-                }}>
-                {UserData.ID}
+                style={{fontSize: 30, fontWeight: 'bold', color: '#373644'}}>
+                Account
               </Text>
-              <Text style={{marginTop: 5, fontSize: 14, color: '#b0b0b0'}}>
-                {UserData.email}
-              </Text>
-            </View>
+              {/* <TouchableOpacity
+             > */}
+              <IconButton
+                icon={Icons.arrow_down}
+                iconStyle={{
+                  height: 30,
+                  width: 25,
+                }}
+                onPress={() => {
+                  console.log('EXP', expanded);
+                  setExpanded(!expanded);
+                }}
+              />
+              {/* </TouchableOpacity> */}
+            </Animated.View>
+
             <View
               style={{
-                marginTop: 0,
-                width: 80,
-                height: 80,
-                backgroundColor: '#e6f0fd',
-                borderRadius: 50,
-                padding: 20,
-                alignItems: 'center',
+                // marginLeft: 20,
+                // marginRight: 20,
+                marginHorizontal: 20,
+                marginTop: 10,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
               }}>
-              <Text style={{fontSize: 30, color: '#a4c4f6'}}>{profile}</Text>
+              <Text style={{fontSize: 20, color: '#3c3b48'}}>
+                {UserData.name}
+              </Text>
+              <ImageIcon
+                icon={Icons.notification}
+                iconStyle={{
+                  height: 30,
+                  width: 25,
+                }}
+              />
             </View>
-          </View>
-        </Animated.View>
-      </Animated.ScrollView>
-    </View>
+          </Animated.View>
+          <Animated.ScrollView
+            onScroll={handleScroll}
+            ref={ref}
+            showsVerticalScrollIndicator={false}>
+            <View
+              style={{
+                width: width,
+                flex: 1,
+                backgroundColor: '#ffffff',
+                borderTopRightRadius: 20,
+                borderTopLeftRadius: 20,
+                marginTop: 130,
+                paddingTop: 75,
+              }}>
+              {/* <FlashList */}
+              <Animated.FlatList
+                // onScroll={handleScroll}
+                // ref={ref}
+                showsVerticalScrollIndicator={false}
+                data={tBody}
+                renderItem={renderHeaderTitle}
+              />
+            </View>
+
+            <Animated.View
+              style={[
+                {
+                  position: 'absolute',
+                  marginLeft: 20,
+                },
+                // {transform: [{translateY}]},
+              ]}>
+              <View
+                style={{
+                  width: viewWidth,
+                  height: headerHeight,
+                  backgroundColor: '#ffffff',
+                  borderRadius: 5,
+                  shadowColor: '#171717',
+                  shadowOffset: {width: -2, height: 4},
+                  shadowOpacity: 0.2,
+                  elevation: 15,
+                  shadowRadius: 3,
+                  padding: 15,
+                  marginTop: 60,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <View>
+                  <Text
+                    style={{
+                      marginTop: 15,
+                      fontSize: 20,
+                      fontWeight: 'bold',
+                      color: '#41404e',
+                    }}>
+                    {UserData.ID}
+                  </Text>
+                  <Text style={{marginTop: 5, fontSize: 14, color: '#b0b0b0'}}>
+                    {UserData.email}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    marginTop: 0,
+                    width: 80,
+                    height: 80,
+                    backgroundColor: '#e6f0fd',
+                    borderRadius: 50,
+                    padding: 20,
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{fontSize: 30, color: '#a4c4f6'}}>
+                    {profile}
+                  </Text>
+                </View>
+              </View>
+            </Animated.View>
+          </Animated.ScrollView>
+          {expanded && (
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#fff',
+                position: 'absolute',
+                opacity: 0.75,
+                height: height,
+                width: width,
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+              }}
+              onPress={() => setExpanded(false)}>
+              {/* <TouchableOpacity onPress={() => setExpanded(false)}>
+              <View style={{height: 20, width: 30}}></View>
+            </TouchableOpacity> */}
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
+      {expanded && (
+        <View
+          style={{
+            width: width,
+            flex: 1,
+            backgroundColor: '#ebecee',
+            paddingTop: 20,
+            shadowColor: '#000',
+            shadowOffset: {width: 2, height: -30},
+            shadowOpacity: 2,
+            elevation: 40,
+            shadowRadius: 30,
+          }}>
+          <StatusBar barStyle="dark-content" backgroundColor="#ebecee" />
+
+          <Animated.View
+            style={{
+              height: 40,
+            }}>
+            <Animated.View
+              style={{
+                marginLeft: 20,
+                marginRight: 20,
+                marginTop: expanded ? 7 : null,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text
+                style={{
+                  fontSize: 30,
+                  fontWeight: 'bold',
+                  color: '#373644', // marginTop: 20,
+                }}>
+                Account
+              </Text>
+              {/* <Animated.View
+            ref={translateYIconNumber}
+            style={{
+              height: 30,
+              transform: [{translateY: translateYIcon}],
+            }}> */}
+              <TouchableOpacity
+                onPress={() => {
+                  console.log('EXP', expanded);
+                  setExpanded(!expanded);
+                }}>
+                <ImageIcon
+                  icon={Icons.arrow_down}
+                  iconStyle={{
+                    height: 30,
+                    width: 25,
+                  }}
+                />
+              </TouchableOpacity>
+              {/* </Animated.View> */}
+            </Animated.View>
+
+            <View
+              style={{
+                // marginLeft: 20,
+                // marginRight: 20,
+                marginHorizontal: 20,
+                marginTop: 10,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text style={{fontSize: 20, color: '#3c3b48'}}>
+                {UserData.name}
+              </Text>
+              <ImageIcon
+                icon={Icons.notification}
+                iconStyle={{
+                  height: 30,
+                  width: 25,
+                }}
+              />
+            </View>
+          </Animated.View>
+          <Animated.ScrollView
+            onScroll={handleScroll}
+            ref={ref}
+            showsVerticalScrollIndicator={false}>
+            <View
+              style={{
+                width: width,
+                flex: 1,
+                backgroundColor: '#ffffff',
+                borderTopRightRadius: 20,
+                borderTopLeftRadius: 20,
+                marginTop: 130,
+                paddingTop: 75,
+              }}>
+              {/* <FlashList */}
+              <Animated.FlatList
+                // onScroll={handleScroll}
+                // ref={ref}
+                showsVerticalScrollIndicator={false}
+                data={tBody}
+                renderItem={renderHeaderTitle}
+              />
+            </View>
+
+            <Animated.View
+              style={[
+                {
+                  position: 'absolute',
+                  marginLeft: 20,
+                },
+                // {transform: [{translateY}]},
+              ]}>
+              <View
+                style={{
+                  width: viewWidth,
+                  height: headerHeight,
+                  backgroundColor: '#ffffff',
+                  borderRadius: 5,
+                  shadowColor: '#171717',
+                  shadowOffset: {width: -2, height: 4},
+                  shadowOpacity: 0.2,
+                  elevation: 15,
+                  shadowRadius: 3,
+                  padding: 15,
+                  marginTop: 60,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <View>
+                  <Text
+                    style={{
+                      marginTop: 15,
+                      fontSize: 20,
+                      fontWeight: 'bold',
+                      color: '#41404e',
+                    }}>
+                    {UserData.ID}
+                  </Text>
+                  <Text style={{marginTop: 5, fontSize: 14, color: '#b0b0b0'}}>
+                    {UserData.email}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    marginTop: 0,
+                    width: 80,
+                    height: 80,
+                    backgroundColor: '#e6f0fd',
+                    borderRadius: 50,
+                    padding: 20,
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{fontSize: 30, color: '#a4c4f6'}}>
+                    {profile}
+                  </Text>
+                </View>
+              </View>
+            </Animated.View>
+          </Animated.ScrollView>
+          {expanded && (
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#fff',
+                position: 'absolute',
+                opacity: 0.75,
+                height: height,
+                width: width,
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+              }}
+              onPress={() => setExpanded(false)}>
+              {/* <TouchableOpacity onPress={() => setExpanded(false)}>
+              <View style={{height: 20, width: 30}}></View>
+            </TouchableOpacity> */}
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
+    </>
   );
 };
 
