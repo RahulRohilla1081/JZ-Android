@@ -225,14 +225,28 @@ const Account = () => {
           },
           // {backgroundColor: 'white'},
         ]}>
-        <Text
-          style={{
-            fontSize: 30,
-            fontWeight: 'bold',
-            color: '#373644', // marginTop: 20,
-          }}>
-          Overview
-        </Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text
+            style={{
+              fontSize: 30,
+              fontWeight: 'bold',
+              color: '#373644', // marginTop: 20,
+            }}>
+            Overview
+          </Text>
+          <TouchableOpacity
+            onPress={() => {
+              setExpanded(false);
+            }}>
+            <ImageIcon
+              icon={Icons.cross}
+              iconStyle={{
+                height: 20,
+                width: 20,
+              }}
+            />
+          </TouchableOpacity>
+        </View>
         <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
           <View>
             <Text style={{fontSize: 15, fontWeight: 'bold', marginTop: 40}}>
