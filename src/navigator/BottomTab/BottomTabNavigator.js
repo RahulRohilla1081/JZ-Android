@@ -19,8 +19,6 @@ const  BottomTabNavigator=()=>{
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
-         
-
           return (
             <ImageIcon
               icon={Icons.watch_list}
@@ -42,11 +40,30 @@ const  BottomTabNavigator=()=>{
           headerShown: false,
         }}
       /> */}
+
+      <Tab.Screen
+        name={ACCOUNT_DETAILS}
+        component={AccountDetails}
+        options={{
+          title: 'LSJ128',
+          headerShown: false,
+          tabBarIcon: ({focused, size, color}) => (
+            <ImageIcon
+              icon={Icons.account}
+              iconStyle={{
+                height: 25,
+                width: 25,
+                tintColor: focused ? '#21a3f1' : COLORS.gray60,
+              }}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name={WATCH_LIST}
         component={WatchList}
         options={{
-          title: "WatchList",
+          title: 'WatchList',
           headerShown: false,
           tabBarIcon: ({focused, size, color}) => (
             <ImageIcon
@@ -74,8 +91,7 @@ const  BottomTabNavigator=()=>{
                 width: 20,
                 tintColor: focused ? '#21a3f1' : COLORS.black,
               }}
-
-              />
+            />
           ),
         }}
       />
@@ -97,8 +113,6 @@ const  BottomTabNavigator=()=>{
           ),
         }}
       />
-
-      
 
       {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
     </Tab.Navigator>
