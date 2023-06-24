@@ -27,6 +27,7 @@ const green_check_mark = require('../assets/icons/green-check-mark.png');
 const pen = require('../assets/icons/pen.png');
 const trading_view = require('../assets/icons/trading_view.png');
 const chart_iq = require('../assets/icons/chart_iq.png');
+const line_chart = require('../assets/icons/line-chart.png');
 
 export default {
   watch_list,
@@ -58,5 +59,5 @@ export default {
   pen,
   trading_view,
   chart_iq,
+  line_chart,
 };
-
