@@ -16,6 +16,7 @@ import {COLORS} from '../../utils/Theme/Theme';
 import nseStocksAction from '../../redux/action/nseStockAction';
 import {connect} from 'react-redux';
 import {WATCH_LIST} from '../../utils/Routes/Routes';
+import AddStocksInWatchList from '../../redux/action/watchlistAction';
 // import {FlashList} from '@shopify/flash-list';
 
 const StockSearch = props => {
@@ -39,7 +40,7 @@ const StockSearch = props => {
   const MarkStockSelected = stockName => {
     let tempSelectedStocks = [];
     selectedStocksList.map(val => {
-      console.log('Stock iteration', val);
+      // console.log('Stock iteration', val);
       tempSelectedStocks.push(val);
     });
 
@@ -51,26 +52,42 @@ const StockSearch = props => {
       tempSelectedStocks.splice(StockIndex, 1);
     }
 
-    console.log(StockIndex);
+    // console.log(StockIndex);
 
     setSelectedStocksList(tempSelectedStocks);
-    console.log('selectedStocks.length', selectedStocksList);
+
+    props.AddStocksInWatchList(
+      props.route.params.state.WATCH_LIST_TYPE,
+      tempSelectedStocks,
+    );
+
+    // console.log('selectedStocks.length', selectedStocksList);
   };
 
   useEffect(() => {
-    if (props.route.params != undefined) {
-      console.log(props.route.params.WATCH_LIST_INDEX);
-    }
-  }, []);
-  useEffect(() => {
     console.log(
-      'selectedStocks hah',
-      selectedStocksList,
-      selectedStocksList.length,
+      'props.WATCH_LIST_1',
+      props[props.route.params.state.WATCH_LIST_TYPE],
+      props.route.params.state.WATCH_LIST_TYPE,
     );
-  }, [selectedStocksList]);
+    setSelectedStocksList(props[props.route.params.state.WATCH_LIST_TYPE]);
+    // console.log(
+    //   'props.props.route.params.WATCH_LIST_TYPE',
+    //   props.route.params.state.WATCH_LIST_TYPE,
+    // );
+  }, []);
+
+  // useEffect(() => {
+  //   console.log(
+  //     'selectedStocks hah',
+  //     selectedStocksList,
+  //     selectedStocksList.length,
+  //   );
+  // }, [selectedStocksList]);
 
   const renderSearchedStocks = ({item, index}) => {
+    const StockIndex = selectedStocksList.findIndex(val => val == item);
+
     return (
       <>
         <View
@@ -109,11 +126,13 @@ const StockSearch = props => {
               alignItems: 'center',
             }}>
             <IconButton
-              icon={Icons.add_outlined}
+              icon={
+                StockIndex == -1 ? Icons.add_outlined : Icons.green_check_mark
+              }
               iconStyle={{
                 height: 25,
                 width: 25,
-                tintColor: '#4781e0',
+                tintColor: StockIndex == -1 ? '#4781e0' : null,
               }}
               onPress={() => {
                 // console.log('index', index);
@@ -212,10 +231,18 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   NSE_STOCK_DATA: state.stocks.nseStockData,
+  Watchlist1: state.watchlist.watchlist1,
+  Watchlist2: state.watchlist.watchlist2,
+  Watchlist3: state.watchlist.watchlist3,
+  Watchlist4: state.watchlist.watchlist4,
+  Watchlist5: state.watchlist.watchlist5,
+  Watchlist6: state.watchlist.watchlist6,
+  Watchlist7: state.watchlist.watchlist7,
 });
 
 export default connect(mapStateToProps, {
   nseStocksAction,
+  AddStocksInWatchList,
 })(StockSearch);
 
 // const mapStateToProps = state => ({

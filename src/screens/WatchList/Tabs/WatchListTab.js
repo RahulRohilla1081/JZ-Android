@@ -246,7 +246,7 @@ setTBody(
                     onPress={() => {
                       navigation.navigate(STOCK_SEARCH, {
                         state: {
-                          WATCH_LIST_INDEX: activeTab,
+                          WATCH_LIST_TYPE: tabs[activeTab].Key,
                         },
                       });
                     }}>
