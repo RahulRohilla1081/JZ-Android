@@ -39,6 +39,8 @@ import Overview from '../../../../components/Overview/Overview';
 
 // import {ScrollView} from 'react-native-gesture-handler';
 
+// const dummy = ;
+
 const WatchListTab = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [expanded, setExpanded] = useState(false);
@@ -74,7 +76,9 @@ const WatchListTab = () => {
     });
   }, []);
 
-  const [tBody, setTBody] = useState([]);
+  const [tBody, setTBody] = useState(
+    []
+  );
   useEffect(() => {
     if (expanded) {
       Animated.timing(animationHeight, {
@@ -112,6 +116,43 @@ const WatchListTab = () => {
     translateYNumber.current = value;
   });
 
+  useEffect(()=>{
+    console.log("Datataaa");
+    if (tBody[tabs[activeTab]?.Key]!=undefined){
+
+      console.log("data",tBody[tabs[activeTab]?.Key][0]);
+    }
+    else{
+      console.log('inside else', tBody.Watchlist2);
+    }
+  },[activeTab])
+
+  useEffect(()=>{
+setTBody(
+  {
+    Watchlist1: [
+      {
+        STOCK_NAME: 'Tata',
+      },
+    ],
+  },
+  {
+    Watchlist2: [
+      {
+        STOCK_NAME: 'Adani',
+      },
+    ],
+  },
+  {
+    Watchlist3: [
+      {
+        STOCK_NAME: 'Reliance',
+      },
+    ],
+  },
+);
+  },[])
+
   const tabs = [
     {Key: 'Watchlist1', Title: 'Watchlist 1'},
     {Key: 'Watchlist2', Title: 'Watchlist 2'},
@@ -123,7 +164,7 @@ const WatchListTab = () => {
   ];
   const buildTab = useCallback(
     (label, index) => {
-      console.log('Rendering this also');
+      console.log('Rendering this also', activeTab);
       return (
         <View
           key={`tab_${index}`}
@@ -174,8 +215,11 @@ const WatchListTab = () => {
                     <MemoizedRenderStocks item={item} index={index} />
                   )}
                 /> */}
+                {tBody[tabs[activeTab]?.Key]!==undefined && 
+                  <MemoizedRenderStocks item={tBody[tabs[activeTab]?.Key][0]} />
+                
+                }
                   <MemoizedRenderStocks item={tBody[1]} />
-                  {/* <MemoizedRenderStocks item={tBody[1]} />
                   <MemoizedRenderStocks item={tBody[2]} />
                   <MemoizedRenderStocks item={tBody[3]} />
                   <MemoizedRenderStocks item={tBody[3]} />
@@ -186,7 +230,7 @@ const WatchListTab = () => {
                   <MemoizedRenderStocks item={tBody[3]} />
                   <MemoizedRenderStocks item={tBody[3]} />
                   <MemoizedRenderStocks item={tBody[3]} />
-                  <MemoizedRenderStocks item={tBody[3]} /> */}
+                  <MemoizedRenderStocks item={tBody[3]} />
                 </View>
 
                 <Animated.View
@@ -200,7 +244,11 @@ const WatchListTab = () => {
                   ]}>
                   <TouchableWithoutFeedback
                     onPress={() => {
-                      navigation.navigate(STOCK_SEARCH);
+                      navigation.navigate(STOCK_SEARCH, {
+                        state: {
+                          WATCH_LIST_INDEX: activeTab,
+                        },
+                      });
                     }}>
                     <View
                       style={{
@@ -313,8 +361,8 @@ const WatchListTab = () => {
               style={{
                 color: COLORS.black,
               }}>
-              {/* {item.RIL} */}
-              Tata Power
+              {item?.STOCK_NAME}
+              {/* Tata Power */}
             </Text>
             <Text
               style={{

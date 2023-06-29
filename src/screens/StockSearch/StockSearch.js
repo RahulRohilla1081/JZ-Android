@@ -18,69 +18,50 @@ import {WATCH_LIST} from '../../utils/Routes/Routes';
 import {FlashList} from '@shopify/flash-list';
 
 const StockSearch = props => {
+
+
   const [searchedStockName, setSearchedStockName] = useState('');
-  const [nseStockTbody, setNseStockTbody] = useState([
-  ]);
+  const [nseStockTbody, setNseStockTbody] = useState([]);
 
-   const StockSearching = stockName => {
-    console.log('StockSearching', StockSearching);
-     setSearchedStockName(stockName.toUpperCase());
-    //  let value = e.target.value;
-     let Tbody_tempArr = [...props.NSE_STOCK_DATA];
+  const StockSearching = stockName => {
+    // console.log('StockSearching', StockSearching);
+    setSearchedStockName(stockName.toUpperCase());
+    let Tbody_tempArr = [...props.NSE_STOCK_DATA];
+    const items = Tbody_tempArr.filter(data => {
+      if (stockName == null) return data;
+      else if (data.toUpperCase().includes(stockName.toUpperCase())) {
+        return data;
+      }
+    });
+    setNseStockTbody(items);
+  };
+  const MarkStockSelected = stockName => {
+    let tempSelectedStocks = [];
+    console.log('selectedStocks.length', selectedStocksList);
+    selectedStocksList.map(val => {
+      console.log('Stock iteration', val);
+      tempSelectedStocks.push({...val});
+    });
 
-      // ||
-      //    data.toUpperCase().includes(
-      //      stockName.toUpperCase(),
-      //    ) ||
-      //    data.toUpperCase().includes(stockName.toUpperCase())
-     const items = Tbody_tempArr.filter(data => {
-       if (stockName == null) return data;
-       else if (
-         data.toUpperCase().includes(stockName.toUpperCase())
-       ) {
-         return data;
-       }
-     });
-        // if (stockName == '' || stockName == undefined) {
-        //   setNseStockTbody([]);
-        // }
-     setNseStockTbody(items);
-  
-       // if(items.length<0){
-       //   setIsProjectEmpty(true)
-       // }else{
-       //   setIsProjectEmpty(false)
+    tempSelectedStocks.push(stockName);
 
-       // }
-       //  if (items.length <= 0) {
-       //    setIsEmployeeEmpty(false);
-       //  } else {
-       //    setIsEmployeeEmpty(true);
-       //  }
-       console.log('PROJECT_SEARCHING', items);
-   };
+    setSelectedStocksList(tempSelectedStocks);
+  };
 
-  useEffect(() => {
-    console.log("props.NSE_STOCK_DATA",props.NSE_STOCK_DATA);
-    // setNseStockTbody(props.NSE_STOCK_DATA);
-  }, [props.NSE_STOCK_DATA]);
-  // nseStockData;
 
-  const [selectedStocks,setSelectedStocks]=useState([])
+const [selectedStocksList, setSelectedStocksList] = useState([]);
 
-  const MarkStockSelected=(stockName,index)=>{
-    console.log(stockName);
-    let tempSelectedStocks = [...selectedStocks];
-    console.log('tempSelectedStocks', tempSelectedStocks);
-    const StockIndex = tempSelectedStocks.findIndex(val => val == stockName)
-    console.log(StockIndex);
-    if(StockIndex==-1){
-      tempSelectedStocks.push(stockName);
-    }
-    setSelectedStocks(tempSelectedStocks);
-  
 
+useEffect(()=>{
+  if (props.route.params != undefined) {
+    console.log(props.route.params.WATCH_LIST_INDEX);
   }
+},[])
+  useEffect(() => {
+    console.log('selectedStocks hah', selectedStocksList, selectedStocksList.length);
+  }, [selectedStocksList]);
+
+  
 
   const renderSearchedStocks = ({item, index}) => {
     return (
@@ -101,7 +82,7 @@ const StockSearch = props => {
               style={{
                 backgroundColor: item.Category == 'NSE' ? '#f9e7e7' : '#e6f0fd',
                 padding: 5,
-                fontSize:12,
+                fontSize: 12,
                 color: item.Category == 'NSE' ? '#d15753' : '#4983e1',
               }}>
               NSE
@@ -128,8 +109,8 @@ const StockSearch = props => {
                 tintColor: '#4781e0',
               }}
               onPress={() => {
-                console.log("index",index);
-                MarkStockSelected(item,index)
+                // console.log('index', index);
+                MarkStockSelected(item);
                 // props.navigation.navigate(WATCH_LIST);
               }}
             />
@@ -178,12 +159,11 @@ const StockSearch = props => {
             selectionColor="#357df3"
             autoCapitalize={'characters'}
             onChangeText={stockName => {
-              console.log(stockName);
+              // console.log(stockName);
               StockSearching(stockName);
-              if(stockName==""){
-                setNseStockTbody([])
+              if (stockName == '') {
+                setNseStockTbody([]);
               }
-            
             }}
           />
         </View>
@@ -191,7 +171,7 @@ const StockSearch = props => {
           <TouchableOpacity
             onPress={() => {
               setSearchedStockName('');
-               setNseStockTbody([]);
+              setNseStockTbody([]);
             }}>
             <Text
               style={{
