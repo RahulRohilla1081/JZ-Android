@@ -242,7 +242,7 @@ const Account = () => {
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                 },
-                {transform: [{translateY}]},
+                // {transform: [{translateY}]},
               ]}>
               <Text
                 style={{fontSize: 30, fontWeight: 'bold', color: '#373644'}}>

@@ -76,9 +76,7 @@ const WatchListTab = () => {
     });
   }, []);
 
-  const [tBody, setTBody] = useState(
-    []
-  );
+  const [tBody, setTBody] = useState([]);
   useEffect(() => {
     if (expanded) {
       Animated.timing(animationHeight, {
@@ -109,49 +107,47 @@ const WatchListTab = () => {
   const scrollYClamped = Animated.diffClamp(scrollY.current, 0, headerHeight);
   const translateY = scrollYClamped.interpolate({
     inputRange: [0, headerHeight],
-    outputRange: [0, -(headerHeight / 2)],
+    outputRange: [0, -(headerHeight / 1)],
   });
   const translateYNumber = useRef();
   translateY.addListener(({value}) => {
     translateYNumber.current = value;
   });
 
-  useEffect(()=>{
-    console.log("Datataaa");
-    if (tBody[tabs[activeTab]?.Key]!=undefined){
-
-      console.log("data",tBody[tabs[activeTab]?.Key][0]);
-    }
-    else{
+  useEffect(() => {
+    console.log('Datataaa');
+    if (tBody[tabs[activeTab]?.Key] != undefined) {
+      console.log('data', tBody[tabs[activeTab]?.Key][0]);
+    } else {
       console.log('inside else', tBody.Watchlist2);
     }
-  },[activeTab])
+  }, [activeTab]);
 
-  useEffect(()=>{
-setTBody(
-  {
-    Watchlist1: [
+  useEffect(() => {
+    setTBody(
       {
-        STOCK_NAME: 'Tata',
+        Watchlist1: [
+          {
+            STOCK_NAME: 'Tata',
+          },
+        ],
       },
-    ],
-  },
-  {
-    Watchlist2: [
       {
-        STOCK_NAME: 'Adani',
+        Watchlist2: [
+          {
+            STOCK_NAME: 'Adani',
+          },
+        ],
       },
-    ],
-  },
-  {
-    Watchlist3: [
       {
-        STOCK_NAME: 'Reliance',
+        Watchlist3: [
+          {
+            STOCK_NAME: 'Reliance',
+          },
+        ],
       },
-    ],
-  },
-);
-  },[])
+    );
+  }, []);
 
   const tabs = [
     {Key: 'Watchlist1', Title: 'Watchlist 1'},
@@ -166,14 +162,15 @@ setTBody(
     (label, index) => {
       console.log('Rendering this also', activeTab);
       return (
-        <View
+        <Animated.View
           key={`tab_${index}`}
           tabLabel={label.Title}
           style={{
             flex: 1,
             height: height,
           }}>
-          <ScrollView
+          <Animated.ScrollView
+            onScroll={handleScroll}
             showsVerticalScrollIndicator={false}
             style={{
               backgroundColor: COLORS.white,
@@ -201,24 +198,11 @@ setTBody(
                     marginTop: 45,
                     paddingTop: 45,
                   }}>
-                  {/* <FlashList */}
-                  {/* <Animated.FlatList
-                  // onScroll={handleScroll}
-                  // ref={ref}
-                  style={{
-                    flex: 1,
-                    backgroundColor: COLORS.white,
-                  }}
-                  showsVerticalScrollIndicator={false}
-                  data={tBody}
-                  renderItem={({item, index}) => (
-                    <MemoizedRenderStocks item={item} index={index} />
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][0]}
+                    />
                   )}
-                /> */}
-                {tBody[tabs[activeTab]?.Key]!==undefined && 
-                  <MemoizedRenderStocks item={tBody[tabs[activeTab]?.Key][0]} />
-                
-                }
                   <MemoizedRenderStocks item={tBody[1]} />
                   <MemoizedRenderStocks item={tBody[2]} />
                   <MemoizedRenderStocks item={tBody[3]} />
@@ -232,14 +216,17 @@ setTBody(
                   <MemoizedRenderStocks item={tBody[3]} />
                   <MemoizedRenderStocks item={tBody[3]} />
                 </View>
-
+                {/* </Animated.ScrollView>
+              <Animated.ScrollView> */}
                 <Animated.View
+                  // onScroll={handleScroll}
                   style={[
                     {
                       position: 'absolute',
                       marginLeft: 20,
                       backgroundColor: COLORS.primary1,
                     },
+
                     // {transform: [{translateY}]},
                   ]}>
                   <TouchableWithoutFeedback
@@ -320,8 +307,8 @@ setTBody(
                 </Animated.View>
               </Animated.ScrollView>
             </Animated.View>
-          </ScrollView>
-        </View>
+          </Animated.ScrollView>
+        </Animated.View>
       );
     },
     [tabs],
@@ -420,7 +407,6 @@ setTBody(
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                 },
-                {transform: [{translateY}]},
               ]}>
               <Text style={styles.header}>Watchlist</Text>
               {/* <TouchableOpacity
@@ -439,36 +425,49 @@ setTBody(
               {/* </TouchableOpacity> */}
             </Animated.View>
           </Animated.View>
-          <Animated.ScrollView
-            onScroll={handleScroll}
-            ref={ref}
-            showsVerticalScrollIndicator={false}>
-            <ScrollableTabView
-              initialPage={activeTab}
-              renderTabBar={() => <ScrollableTabBar />}
-              tabBarTextStyle={styles.tabText}
-              onChangeTab={({i}) => {
-                // console.log(i);
-                // TabChangeAnimation(i);
-                setActiveTab(i);
-              }}
-              tabBarActiveTextColor="red"
-              tabBarInactiveTextColor="red"
-              locked={false}
-              onScroll={e => {
-                // console.log(e);
-              }}
-              contentStyle={{
-                backgroundColor: COLORS.primary1,
-              }}
-              showsVerticalScrollIndicator={false}
-              tabBarUnderlineStyle={{
-                backgroundColor: COLORS.primary,
-                // flex:1
+          {/* <Animated.ScrollView
+            // onScroll={handleScroll}
+            // ref={ref}
+            showsVerticalScrollIndicator={false}></Animated.ScrollView> */}
+          {/* *********** */}
+          {/* <Animated.View style={[{height: 40, transform: [{translateY}]}]}> */}
+
+          <Animated.View
+            style={{
+              position: 'absolute',
+              transform: [{translateY}],
+            }}>
+            <View
+              style={{
+                top: 70,
               }}>
-              {tabs.map((tab, index) => buildTab(tab, index))}
-            </ScrollableTabView>
-          </Animated.ScrollView>
+              <ScrollableTabView
+                initialPage={activeTab}
+                renderTabBar={() => <ScrollableTabBar />}
+                tabBarTextStyle={styles.tabText}
+                onChangeTab={({i}) => {
+                  // console.log(i);
+                  // TabChangeAnimation(i);
+                  setActiveTab(i);
+                }}
+                tabBarActiveTextColor="red"
+                tabBarInactiveTextColor="red"
+                locked={false}
+                contentStyle={{
+                  backgroundColor: COLORS.primary1,
+                }}
+                showsVerticalScrollIndicator={false}
+                tabBarUnderlineStyle={{
+                  backgroundColor: COLORS.primary,
+                  // flex:1
+                }}>
+                {tabs.map((tab, index) => buildTab(tab, index))}
+              </ScrollableTabView>
+            </View>
+          </Animated.View>
+
+          {/* </Animated.View> */}
+
           {expanded && (
             <TouchableOpacity
               style={{
