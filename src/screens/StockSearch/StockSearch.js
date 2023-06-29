@@ -5,6 +5,7 @@ import {
   TextInput,
   StatusBar,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Icons from '../../../constants/Icons';
@@ -15,13 +16,12 @@ import {COLORS} from '../../utils/Theme/Theme';
 import nseStocksAction from '../../redux/action/nseStockAction';
 import {connect} from 'react-redux';
 import {WATCH_LIST} from '../../utils/Routes/Routes';
-import {FlashList} from '@shopify/flash-list';
+// import {FlashList} from '@shopify/flash-list';
 
 const StockSearch = props => {
-
-
   const [searchedStockName, setSearchedStockName] = useState('');
   const [nseStockTbody, setNseStockTbody] = useState([]);
+  const [selectedStocksList, setSelectedStocksList] = useState([]);
 
   const StockSearching = stockName => {
     // console.log('StockSearching', StockSearching);
@@ -35,33 +35,40 @@ const StockSearch = props => {
     });
     setNseStockTbody(items);
   };
+
   const MarkStockSelected = stockName => {
     let tempSelectedStocks = [];
-    console.log('selectedStocks.length', selectedStocksList);
     selectedStocksList.map(val => {
       console.log('Stock iteration', val);
-      tempSelectedStocks.push({...val});
+      tempSelectedStocks.push(val);
     });
 
-    tempSelectedStocks.push(stockName);
+    const StockIndex = tempSelectedStocks.findIndex(val => val == stockName);
+
+    if (StockIndex == -1) {
+      tempSelectedStocks.push(stockName);
+    } else {
+      tempSelectedStocks.splice(StockIndex, 1);
+    }
+
+    console.log(StockIndex);
 
     setSelectedStocksList(tempSelectedStocks);
+    console.log('selectedStocks.length', selectedStocksList);
   };
 
-
-const [selectedStocksList, setSelectedStocksList] = useState([]);
-
-
-useEffect(()=>{
-  if (props.route.params != undefined) {
-    console.log(props.route.params.WATCH_LIST_INDEX);
-  }
-},[])
   useEffect(() => {
-    console.log('selectedStocks hah', selectedStocksList, selectedStocksList.length);
+    if (props.route.params != undefined) {
+      console.log(props.route.params.WATCH_LIST_INDEX);
+    }
+  }, []);
+  useEffect(() => {
+    console.log(
+      'selectedStocks hah',
+      selectedStocksList,
+      selectedStocksList.length,
+    );
   }, [selectedStocksList]);
-
-  
 
   const renderSearchedStocks = ({item, index}) => {
     return (
@@ -189,7 +196,7 @@ useEffect(()=>{
           backgroundColor: COLORS.gray10,
         }}
       />
-      <FlashList data={nseStockTbody} renderItem={renderSearchedStocks} />
+      <FlatList data={nseStockTbody} renderItem={renderSearchedStocks} />
       {/* <Text>StockSearch</Text> */}
     </View>
   );
