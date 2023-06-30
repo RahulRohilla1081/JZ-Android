@@ -34,6 +34,9 @@ import {
 import socketServices from '../../../utils/SocketIO/socketService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import Overview from '../../../../components/Overview/Overview';
+import { connect } from 'react-redux';
+import AddStocksInWatchList from '../../../redux/action/watchlistAction';
+
 // import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
 
@@ -41,14 +44,14 @@ import Overview from '../../../../components/Overview/Overview';
 
 // const dummy = ;
 
-const WatchListTab = () => {
+const WatchListTab = (props) => {
   const [activeTab, setActiveTab] = useState(0);
   const [expanded, setExpanded] = useState(false);
   const scrollY = useRef(new Animated.Value(0));
   const navigation = useNavigation();
   const {height, width} = useWindowDimensions();
   const viewWidth = width - 40;
-  const headerHeight = 60 * 2;
+  const headerHeight = 50 * 2;
   const animationHeight = useRef(new Animated.Value(0)).current;
   const ref = useRef(null);
 
@@ -107,7 +110,7 @@ const WatchListTab = () => {
   const scrollYClamped = Animated.diffClamp(scrollY.current, 0, headerHeight);
   const translateY = scrollYClamped.interpolate({
     inputRange: [0, headerHeight],
-    outputRange: [0, -(headerHeight / 1)],
+    outputRange: [0, -headerHeight / 1.2],
   });
   const translateYNumber = useRef();
   translateY.addListener(({value}) => {
@@ -123,40 +126,26 @@ const WatchListTab = () => {
     }
   }, [activeTab]);
 
-  useEffect(() => {
-    setTBody(
-      {
-        Watchlist1: [
-          {
-            STOCK_NAME: 'Tata',
-          },
-        ],
-      },
-      {
-        Watchlist2: [
-          {
-            STOCK_NAME: 'Adani',
-          },
-        ],
-      },
-      {
-        Watchlist3: [
-          {
-            STOCK_NAME: 'Reliance',
-          },
-        ],
-      },
-    );
-  }, []);
+    useEffect(() => {
+      setTBody({
+        WATCH_LIST_1: props.WATCH_LIST_1,
+        WATCH_LIST_2: props.WATCH_LIST_2,
+        WATCH_LIST_3: props.WATCH_LIST_3,
+        WATCH_LIST_4: props.WATCH_LIST_4,
+        WATCH_LIST_5: props.WATCH_LIST_5,
+        WATCH_LIST_6: props.WATCH_LIST_6,
+        WATCH_LIST_7: props.WATCH_LIST_7,
+      });
+    }, [props]);
 
   const tabs = [
-    {Key: 'Watchlist1', Title: 'Watchlist 1'},
-    {Key: 'Watchlist2', Title: 'Watchlist 2'},
-    {Key: 'Watchlist3', Title: 'Watchlist 3'},
-    {Key: 'Watchlist4', Title: 'Watchlist 4'},
-    {Key: 'Watchlist5', Title: 'Watchlist 5'},
-    {Key: 'Watchlist6', Title: 'Watchlist 6'},
-    {Key: 'Watchlist7', Title: 'Watchlist 7'},
+    {Key: 'WATCH_LIST_1', Title: 'Watchlist 1'},
+    {Key: 'WATCH_LIST_2', Title: 'Watchlist 2'},
+    {Key: 'WATCH_LIST_3', Title: 'Watchlist 3'},
+    {Key: 'WATCH_LIST_4', Title: 'Watchlist 4'},
+    {Key: 'WATCH_LIST_5', Title: 'Watchlist 5'},
+    {Key: 'WATCH_LIST_6', Title: 'Watchlist 6'},
+    {Key: 'WATCH_LIST_7', Title: 'Watchlist 7'},
   ];
   const buildTab = useCallback(
     (label, index) => {
@@ -189,9 +178,6 @@ const WatchListTab = () => {
                 showsVerticalScrollIndicator={false}>
                 <View
                   style={{
-                    // width: width,
-                    // flex: 1,
-
                     backgroundColor: '#ffffff',
                     borderTopRightRadius: 20,
                     borderTopLeftRadius: 20,
@@ -203,8 +189,58 @@ const WatchListTab = () => {
                       item={tBody[tabs[activeTab]?.Key][0]}
                     />
                   )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][0]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][1]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][2]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][3]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][4]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][5]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][6]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][7]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][8]}
+                    />
+                  )}
+                  {tBody[tabs[activeTab]?.Key] != undefined && (
+                    <MemoizedRenderStocks
+                      item={tBody[tabs[activeTab]?.Key][9]}
+                    />
+                  )}
                   <MemoizedRenderStocks item={tBody[1]} />
-                  <MemoizedRenderStocks item={tBody[2]} />
+                  {/* <MemoizedRenderStocks item={tBody[2]} />
                   <MemoizedRenderStocks item={tBody[3]} />
                   <MemoizedRenderStocks item={tBody[3]} />
                   <MemoizedRenderStocks item={tBody[3]} />
@@ -214,7 +250,7 @@ const WatchListTab = () => {
                   <MemoizedRenderStocks item={tBody[3]} />
                   <MemoizedRenderStocks item={tBody[3]} />
                   <MemoizedRenderStocks item={tBody[3]} />
-                  <MemoizedRenderStocks item={tBody[3]} />
+                  <MemoizedRenderStocks item={tBody[3]} /> */}
                 </View>
                 {/* </Animated.ScrollView>
               <Animated.ScrollView> */}
@@ -313,51 +349,46 @@ const WatchListTab = () => {
     },
     [tabs],
   );
-
-  const renderStockList = ({item, index}) => {
-    console.log('Priniting', index);
-    return (
-      <View
-        style={
-          {
-            // flex: 1,
-          }
-        }>
-        {index == 0 && (
-          <View
-            style={{
-              borderColor: COLORS.gray10,
-              borderWidth: 0.5,
-              // borderTopWidth: 1,
-            }}
-          />
-        )}
-        <TouchableOpacity
-          onPress={() => {
-            // navigation.navigate(STOCK_CHART)
-            ShowOptionButtonModal.current.open();
-            // handleSheetChanges();
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              padding: 20,
-            }}>
-            <Text
-              style={{
-                color: COLORS.black,
-              }}>
-              {item?.STOCK_NAME}
-              {/* Tata Power */}
-            </Text>
-            <Text
-              style={{
-                color: COLORS.green,
-              }}>
-              {item?.RIL}
-            </Text>
-            {/* <ImageIcon
+ const renderStockList = ({item, index}) => {
+   console.log('Priniting', index);
+   return (
+    //  item != undefined && (
+       <View style={{}}>
+         {index == 0 && (
+           <View
+             style={{
+               borderColor: COLORS.gray10,
+               borderWidth: 0.5,
+               // borderTopWidth: 1,
+             }}
+           />
+         )}
+         <TouchableOpacity
+           onPress={() => {
+             // navigation.navigate(STOCK_CHART)
+             ShowOptionButtonModal.current.open();
+             // handleSheetChanges();
+           }}>
+           <View
+             style={{
+               flexDirection: 'row',
+               justifyContent: 'space-between',
+               padding: 20,
+             }}>
+             <Text
+               style={{
+                 color: COLORS.black,
+               }}>
+               {item}
+               {/* Tata Power */}
+             </Text>
+             <Text
+               style={{
+                 color: COLORS.green,
+               }}>
+               {item?.RIL}
+             </Text>
+             {/* <ImageIcon
               icon={item.icon}
               iconStyle={{
                 height: 30,
@@ -365,18 +396,20 @@ const WatchListTab = () => {
                 tintColor: 'grey',
               }}
             /> */}
-          </View>
-        </TouchableOpacity>
-        <View
-          style={{
-            borderColor: COLORS.gray10,
-            borderWidth: 0.5,
-            // borderTopWidth: 1,
-          }}
-        />
-      </View>
-    );
-  };
+           </View>
+         </TouchableOpacity>
+         <View
+           style={{
+             borderColor: COLORS.gray10,
+             borderWidth: 0.5,
+             // borderTopWidth: 1,
+           }}
+         />
+       </View>
+     )
+  //  );
+ };
+
 
   const MemoizedRenderStocks = memo(renderStockList);
 
@@ -667,4 +700,16 @@ const styles = StyleSheet.create({
     minHeight: 80,
   },
 });
-export default WatchListTab;
+const mapStateToProps = state => ({
+  WATCH_LIST_1: state.watchlist.watchlist1,
+  WATCH_LIST_2: state.watchlist.watchlist2,
+  WATCH_LIST_3: state.watchlist.watchlist3,
+  WATCH_LIST_4: state.watchlist.watchlist4,
+  WATCH_LIST_5: state.watchlist.watchlist5,
+  WATCH_LIST_6: state.watchlist.watchlist6,
+  WATCH_LIST_7: state.watchlist.watchlist7,
+});
+
+export default connect(mapStateToProps, {
+  AddStocksInWatchList,
+})(WatchListTab);

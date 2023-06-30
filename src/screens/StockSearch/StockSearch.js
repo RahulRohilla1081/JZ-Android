@@ -231,13 +231,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   NSE_STOCK_DATA: state.stocks.nseStockData,
-  Watchlist1: state.watchlist.watchlist1,
-  Watchlist2: state.watchlist.watchlist2,
-  Watchlist3: state.watchlist.watchlist3,
-  Watchlist4: state.watchlist.watchlist4,
-  Watchlist5: state.watchlist.watchlist5,
-  Watchlist6: state.watchlist.watchlist6,
-  Watchlist7: state.watchlist.watchlist7,
+  WATCH_LIST_1: state.watchlist.watchlist1,
+  WATCH_LIST_2: state.watchlist.watchlist2,
+  WATCH_LIST_3: state.watchlist.watchlist3,
+  WATCH_LIST_4: state.watchlist.watchlist4,
+  WATCH_LIST_5: state.watchlist.watchlist5,
+  WATCH_LIST_6: state.watchlist.watchlist6,
+  WATCH_LIST_7: state.watchlist.watchlist7,
 });
 
 export default connect(mapStateToProps, {
