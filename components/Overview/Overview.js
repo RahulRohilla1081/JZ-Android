@@ -34,17 +34,17 @@ const Overview = ({animationHeight, onPress}) => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text
             style={{
-              fontSize: 30,
+              fontSize: 24,
               fontWeight: 'bold',
-              color: '#373644', // marginTop: 20,
+              color: '#373644',
             }}>
             Overview
           </Text>
           <IconButton
             icon={Icons.cross}
             iconStyle={{
-              height: 20,
-              width: 20,
+              height: 18,
+              width: 18,
             }}
             onPress={onPress}
           />
@@ -99,7 +99,7 @@ const Overview = ({animationHeight, onPress}) => {
             height: 1,
           }}
         />
-        <Text style={{paddingVertical: 20, fontWeight: 'bold', fontSize: 15}}>
+        <Text style={{paddingVertical: 10, fontWeight: 'bold', fontSize: 15}}>
           Funds
         </Text>
         <Text style={{color: COLORS.gray20}}>Equity</Text>

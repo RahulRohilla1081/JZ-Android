@@ -12,37 +12,37 @@ const initialState = {
 
 const watchlist = (state = initialState, action) => {
   switch (action.type) {
-    case 'Watchlist1':
+    case 'WATCH_LIST_1':
       return {
         ...state,
         watchlist1: action.payload,
       };
-    case 'Watchlist2':
+    case 'WATCH_LIST_2':
       return {
         ...state,
         watchlist2: action.payload,
       };
-    case 'Watchlist3':
+    case 'WATCH_LIST_3':
       return {
         ...state,
         watchlist3: action.payload,
       };
-    case 'Watchlist4':
+    case 'WATCH_LIST_4':
       return {
         ...state,
         watchlist4: action.payload,
       };
-    case 'Watchlist5':
+    case 'WATCH_LIST_5':
       return {
         ...state,
         watchlist5: action.payload,
       };
-    case 'Watchlist6':
+    case 'WATCH_LIST_6':
       return {
         ...state,
         watchlist6: action.payload,
       };
-    case 'Watchlist7':
+    case 'WATCH_LIST_7':
       return {
         ...state,
         watchlist7: action.payload,
