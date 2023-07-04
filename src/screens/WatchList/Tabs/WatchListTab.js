@@ -48,7 +48,7 @@ const WatchListTab = () => {
   const navigation = useNavigation();
   const {height, width} = useWindowDimensions();
   const viewWidth = width - 40;
-  const headerHeight = 60 * 2;
+  const headerHeight = 50 * 2;
   const animationHeight = useRef(new Animated.Value(0)).current;
   const ref = useRef(null);
 
@@ -107,7 +107,7 @@ const WatchListTab = () => {
   const scrollYClamped = Animated.diffClamp(scrollY.current, 0, headerHeight);
   const translateY = scrollYClamped.interpolate({
     inputRange: [0, headerHeight],
-    outputRange: [0, -(headerHeight / 1)],
+    outputRange: [0, -headerHeight / 1.2],
   });
   const translateYNumber = useRef();
   translateY.addListener(({value}) => {
@@ -411,6 +411,7 @@ const WatchListTab = () => {
               <Text style={styles.header}>Watchlist</Text>
               {/* <TouchableOpacity
              > */}
+
               <IconButton
                 icon={Icons.arrow_down}
                 iconStyle={{
@@ -511,6 +512,7 @@ const WatchListTab = () => {
                 justifyContent: 'space-between',
               }}>
               <Text style={styles.header}>Watchlist</Text>
+
               {/* <Animated.View
             ref={translateYIconNumber}
             style={{
