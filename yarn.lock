@@ -6269,6 +6269,11 @@ react-native-animatable@1.3.3:
   dependencies:
     prop-types "^15.7.2"
 
+react-native-bottomsheet-reanimated@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-bottomsheet-reanimated/-/react-native-bottomsheet-reanimated-0.3.1.tgz#90820966e24afda7761f2565f55c91caa9d879e1"
+  integrity sha512-9js9MHZDKSqFTYv+PC2nHlPAXJ2JV85FjTDKxrxReq4MHbKYEsXo1S9wbdc60rn0MSU+Hoz3teikpzlYZKDu1w==
+
 react-native-codegen@^0.71.5:
   version "0.71.5"
   resolved "https://registry.yarnpkg.com/react-native-codegen/-/react-native-codegen-0.71.5.tgz#454a42a891cd4ca5fc436440d301044dc1349c14"
@@ -6309,6 +6314,11 @@ react-native-haptic-feedback@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/react-native-haptic-feedback/-/react-native-haptic-feedback-2.0.3.tgz#09133b2175503831c04798cb0dc63ae91e3959c1"
   integrity sha512-7+qvcxXZts/hA+HOOIFyM1x9m9fn/TJVSTgXaoQ8uT4gLc97IMvqHQ559tDmnlth+hHMzd3HRMpmRLWoKPL0DA==
+
+react-native-interactable-reanimated@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/react-native-interactable-reanimated/-/react-native-interactable-reanimated-0.0.15.tgz#b54a22541f87bdf747bcd7e220a9b185cdffbf42"
+  integrity sha512-WvzeHuSObx4eCJfTNMHnu1zxpczU5wKSs4DfBANCWy0nSaf/M4RWspdncfEs6azSSJODtd+SWl5I2/380NfzFg==
 
 react-native-modal@^13.0.1:
   version "13.0.1"

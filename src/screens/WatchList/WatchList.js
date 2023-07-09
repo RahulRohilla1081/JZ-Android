@@ -420,12 +420,12 @@ const WatchList = props => {
     [tabs],
   );
   const renderStockList = ({item, index}) => {
-     console.log('Priniting', item);
+    //  console.log('Priniting', item);
     return (
       //  item != undefined && (
       //  <View style={{}}>
 
-      item != undefined && (
+      item?.SYMBOL != undefined && (
         <>
           <TouchableOpacity
             onPress={() => {
@@ -443,14 +443,14 @@ const WatchList = props => {
                 style={{
                   color: COLORS.black,
                 }}>
-                {item}
+                {item?.SYMBOL}
                 {/* Tata Power */}
               </Text>
               <Text
                 style={{
                   color: COLORS.green,
                 }}>
-                {item?.RIL}
+                {item?.SYMBOL}
               </Text>
               {/* <ImageIcon
               icon={item.icon}

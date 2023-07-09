@@ -31,7 +31,7 @@ const StockSearch = props => {
     let Tbody_tempArr = [...props.NSE_STOCK_DATA];
     const items = Tbody_tempArr.filter(data => {
       if (stockName == null) return data;
-      else if (data["Security Name"].toUpperCase().includes(stockName.toUpperCase())) {
+      else if (data?.SYMBOL.toUpperCase().includes(stockName.toUpperCase())) {
         return data;
       }
     });
@@ -39,6 +39,7 @@ const StockSearch = props => {
   };
 
   const MarkStockSelected = stockName => {
+    console.log('stockName', stockName);
     let tempSelectedStocks = [];
     selectedStocksList.map(val => {
       // console.log('Stock iteration', val);
@@ -46,7 +47,7 @@ const StockSearch = props => {
     });
 
     const StockIndex = tempSelectedStocks.findIndex(
-      val => val['Security Id'] == stockName['Security Id'],
+      val => val.SYMBOL == stockName.SYMBOL,
     );
     console.log('StockIndexskdjbfhdsj', StockIndex);
 
@@ -56,7 +57,7 @@ const StockSearch = props => {
       tempSelectedStocks.splice(StockIndex, 1);
     }
 
-    // console.log(StockIndex);
+    console.log(StockIndex);
 
     setSelectedStocksList(tempSelectedStocks);
 
@@ -121,18 +122,18 @@ const StockSearch = props => {
                   marginHorizontal: 10,
                   fontSize: 14,
                   color: '#373644',
-                  margin:2
+                  margin: 2,
                 }}>
-                {/* {item['Security Id']} */}
+                {item?.SYMBOL}
               </Text>
               <Text
                 style={{
                   marginHorizontal: 10,
                   fontSize: 14,
                   color: COLORS.gray20,
-                  margin:2
+                  margin: 2,
                 }}>
-                {/* {item['Security Name']} */}
+                {item?.ISSUER_NAME}
               </Text>
             </View>
           </View>
