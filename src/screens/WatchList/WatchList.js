@@ -71,9 +71,41 @@ const WatchList = props => {
 
   useEffect(() => {
     socketServices.initializeSocket();
+    socketServices.emit('join', {
+      USER_ID: 'JZ00001',
+      data: {
+        WATCH_LIST_1: [
+          'TATACHEM',
+          'TATACOFFEE',
+          'TATACOMM',
+          'TATACONSUM',
+          'TATAELXSI',
+          'TATAINVEST',
+          'TATAMETALI',
+          'TATAMOTORS',
+          'SBILIFE',
+          'SBICARD',
+          'SBIN',
+        ],
+        WATCH_LIST_2: ['HDFC'],
+        WATCH_LIST_3: [],
+        WATCH_LIST_4: [],
+        WATCH_LIST_5: [],
+        WATCH_LIST_6: [],
+        WATCH_LIST_7: [],
+      },
+    });
+
+    // socketServices.on('stockDataGetIO', data => {
+    //   console.log('data', data);
+    //   // setTBody(data.USER_DATA);
+    //   // dispatch({type: 'STOCKS_UPDATE', stocksArray: data.USER_DATA});
+    //   //  setWatchListData(data);
+    //   // console.log('jabdgavsdgds', props.STOCKS_ARRAY);
+    // });
     socketServices.on('newMessage', data => {
-      console.log('data', data);
-      setTBody(data.USER_DATA);
+      console.log('dataljdnsf', data);
+      // setTBody(data.USER_DATA);
       // dispatch({type: 'STOCKS_UPDATE', stocksArray: data.USER_DATA});
       //  setWatchListData(data);
       // console.log('jabdgavsdgds', props.STOCKS_ARRAY);
@@ -388,7 +420,7 @@ const WatchList = props => {
     [tabs],
   );
   const renderStockList = ({item, index}) => {
-    //  console.log('Priniting', index);
+     console.log('Priniting', item);
     return (
       //  item != undefined && (
       //  <View style={{}}>

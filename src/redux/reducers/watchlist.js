@@ -1,7 +1,5 @@
 const initialState = {
-  watchlist1: [{
-    name:"abcdef"
-  }],
+  watchlist1: [],
   watchlist2: [],
   watchlist3: [],
   watchlist4: [],

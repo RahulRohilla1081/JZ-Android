@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-const axiosUrl = 'http://192.168.1.13:9000/';
-=======
-const axiosUrl = 'http://192.168.43.137:9000/';
->>>>>>> 48e9ec26c93a948aecd3d2dda77806af0631e292
-const nse_stock_get = 'main_api/nse_data/nse_symbols_get';
+// const axiosUrl = 'http://192.168.1.13:9000/';
+const axiosUrl = 'http://192.168.43.90:9000/';
+const nse_stock_get = 'main_api/stock_data/stock_list_excel_to_json_get';
 
 export default {
   axiosUrl,

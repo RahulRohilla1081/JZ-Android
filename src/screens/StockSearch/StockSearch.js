@@ -24,13 +24,14 @@ const StockSearch = props => {
   const [nseStockTbody, setNseStockTbody] = useState([]);
   const [selectedStocksList, setSelectedStocksList] = useState([]);
 
+
   const StockSearching = stockName => {
     // console.log('StockSearching', StockSearching);
     setSearchedStockName(stockName.toUpperCase());
     let Tbody_tempArr = [...props.NSE_STOCK_DATA];
     const items = Tbody_tempArr.filter(data => {
       if (stockName == null) return data;
-      else if (data.toUpperCase().includes(stockName.toUpperCase())) {
+      else if (data["Security Name"].toUpperCase().includes(stockName.toUpperCase())) {
         return data;
       }
     });
@@ -44,7 +45,10 @@ const StockSearch = props => {
       tempSelectedStocks.push(val);
     });
 
-    const StockIndex = tempSelectedStocks.findIndex(val => val == stockName);
+    const StockIndex = tempSelectedStocks.findIndex(
+      val => val['Security Id'] == stockName['Security Id'],
+    );
+    console.log('StockIndexskdjbfhdsj', StockIndex);
 
     if (StockIndex == -1) {
       tempSelectedStocks.push(stockName);
@@ -65,11 +69,11 @@ const StockSearch = props => {
   };
 
   useEffect(() => {
-    console.log(
-      'props.WATCH_LIST_1',
-      props[props.route.params.state.WATCH_LIST_TYPE],
-      props.route.params.state.WATCH_LIST_TYPE,
-    );
+    // console.log(
+    //   'props.WATCH_LIST_1',
+    //   props[props.route.params.state.WATCH_LIST_TYPE],
+    //   props.route.params.state.WATCH_LIST_TYPE,
+    // );
     setSelectedStocksList(props[props.route.params.state.WATCH_LIST_TYPE]);
     // console.log(
     //   'props.props.route.params.WATCH_LIST_TYPE',
@@ -77,13 +81,13 @@ const StockSearch = props => {
     // );
   }, []);
 
-  // useEffect(() => {
-  //   console.log(
-  //     'selectedStocks hah',
-  //     selectedStocksList,
-  //     selectedStocksList.length,
-  //   );
-  // }, [selectedStocksList]);
+  useEffect(() => {
+    console.log(
+      'selectedStocks hah',
+      selectedStocksList,
+      selectedStocksList.length,
+    );
+  }, [selectedStocksList]);
 
   const renderSearchedStocks = ({item, index}) => {
     const StockIndex = selectedStocksList.findIndex(val => val == item);
@@ -111,14 +115,26 @@ const StockSearch = props => {
               }}>
               NSE
             </Text>
-            <Text
-              style={{
-                marginHorizontal: 10,
-                fontSize: 15,
-                color: '#373644',
-              }}>
-              {item}
-            </Text>
+            <View>
+              <Text
+                style={{
+                  marginHorizontal: 10,
+                  fontSize: 14,
+                  color: '#373644',
+                  margin:2
+                }}>
+                {/* {item['Security Id']} */}
+              </Text>
+              <Text
+                style={{
+                  marginHorizontal: 10,
+                  fontSize: 14,
+                  color: COLORS.gray20,
+                  margin:2
+                }}>
+                {/* {item['Security Name']} */}
+              </Text>
+            </View>
           </View>
           <View
             style={{

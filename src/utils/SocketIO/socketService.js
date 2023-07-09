@@ -28,6 +28,7 @@ class WSService {
   };
 
   emit(event, data = {}) {
+    console.log('event,data', event, data);
     this.socket.emit(event, data);
   }
 
