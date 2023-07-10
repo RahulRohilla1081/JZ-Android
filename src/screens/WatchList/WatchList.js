@@ -70,29 +70,42 @@ const WatchList = props => {
   const [funds, setFunds] = useState({equity: 10000});
 
   useEffect(() => {
+
+    // {
+    //   USER_ID: 'JZ00001',
+    //   data: {
+    //     WATCH_LIST_1: [
+    //       'TATACHEM',
+    //       'TATACOFFEE',
+    //       'TATACOMM',
+    //       'TATACONSUM',
+    //       'TATAELXSI',
+    //       'TATAINVEST',
+    //       'TATAMETALI',
+    //       'TATAMOTORS',
+    //       'SBILIFE',
+    //       'SBICARD',
+    //       'SBIN',
+    //     ],
+    //     WATCH_LIST_2: ['HDFC'],
+    //     WATCH_LIST_3: [],
+    //     WATCH_LIST_4: [],
+    //     WATCH_LIST_5: [],
+    //     WATCH_LIST_6: [],
+    //     WATCH_LIST_7: [],
+    //   },
+    // }
     socketServices.initializeSocket();
     socketServices.emit('join', {
       USER_ID: 'JZ00001',
       data: {
-        WATCH_LIST_1: [
-          'TATACHEM',
-          'TATACOFFEE',
-          'TATACOMM',
-          'TATACONSUM',
-          'TATAELXSI',
-          'TATAINVEST',
-          'TATAMETALI',
-          'TATAMOTORS',
-          'SBILIFE',
-          'SBICARD',
-          'SBIN',
-        ],
-        WATCH_LIST_2: ['HDFC'],
-        WATCH_LIST_3: [],
-        WATCH_LIST_4: [],
-        WATCH_LIST_5: [],
-        WATCH_LIST_6: [],
-        WATCH_LIST_7: [],
+        WATCH_LIST_1: props.WATCH_LIST_1,
+        WATCH_LIST_2: props.WATCH_LIST_2,
+        WATCH_LIST_3: props.WATCH_LIST_3,
+        WATCH_LIST_4: props.WATCH_LIST_4,
+        WATCH_LIST_5: props.WATCH_LIST_5,
+        WATCH_LIST_6: props.WATCH_LIST_6,
+        WATCH_LIST_7: props.WATCH_LIST_7,
       },
     });
 
@@ -105,12 +118,22 @@ const WatchList = props => {
     // });
     socketServices.on('newMessage', data => {
       console.log('dataljdnsf', data);
-      // setTBody(data.USER_DATA);
+      if (data.USER_DATA != undefined) {
+        setTBody(data.USER_DATA);
+      }
       // dispatch({type: 'STOCKS_UPDATE', stocksArray: data.USER_DATA});
       //  setWatchListData(data);
       // console.log('jabdgavsdgds', props.STOCKS_ARRAY);
     });
-  }, []);
+  }, [
+    props.WATCH_LIST_1,
+    props.WATCH_LIST_2,
+    props.WATCH_LIST_3,
+    props.WATCH_LIST_4,
+    props.WATCH_LIST_5,
+    props.WATCH_LIST_6,
+    props.WATCH_LIST_7,
+  ]);
 
   const [tBody, setTBody] = useState([]);
   useEffect(() => {
@@ -450,7 +473,7 @@ const WatchList = props => {
                 style={{
                   color: COLORS.green,
                 }}>
-                {item?.SYMBOL}
+                {item?.SYMBOL_CURRENT_PRICE}
               </Text>
               {/* <ImageIcon
               icon={item.icon}

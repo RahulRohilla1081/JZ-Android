@@ -4,11 +4,18 @@ import axios from 'axios';
 const nseStocksAction = () => dispatch => {
     // console.log('responseakdbhsajdb');
 
-    axios.post(AXIOS.axiosUrl+AXIOS.nse_stock_get).then((response)=>{
-        // console.log('responseakdbhsajdb', response.data.nse_data);
+    // console.log(
+    //   'AXIOS.axiosUrl+AXIOS.nse_stock_get',
+    //   AXIOS.axiosUrl + AXIOS.nse_stock_get,
+    // );
+
+    axios.get(AXIOS.axiosUrl+AXIOS.nse_stock_get).then((response)=>{
+
+
+        console.log('responseakdbhsajdb', response.data);
         dispatch({
           type: 'NSE_STOCK_DATA_UPDATE',
-          nseStockData: response.data.nse_data,
+          nseStockData: response.data,
         });
     }).catch((err)=>{
         console.log(err);

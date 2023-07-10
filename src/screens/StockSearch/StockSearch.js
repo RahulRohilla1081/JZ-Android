@@ -112,9 +112,9 @@ const StockSearch = props => {
                 backgroundColor: item.Category == 'NSE' ? '#f9e7e7' : '#e6f0fd',
                 padding: 5,
                 fontSize: 12,
-                color: item.Category == 'NSE' ? '#d15753' : '#4983e1',
+                color: item?.EXCHANGE == 'NSE' ? '#d15753' : '#4983e1',
               }}>
-              NSE
+              {item?.EXCHANGE}
             </Text>
             <View>
               <Text
