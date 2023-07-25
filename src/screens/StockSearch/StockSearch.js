@@ -17,7 +17,6 @@ import nseStocksAction from '../../redux/action/nseStockAction';
 import {connect} from 'react-redux';
 import {WATCH_LIST} from '../../utils/Routes/Routes';
 import AddStocksInWatchList from '../../redux/action/watchlistAction';
-// import {FlashList} from '@shopify/flash-list';
 
 const StockSearch = props => {
   const [searchedStockName, setSearchedStockName] = useState('');
@@ -93,6 +92,7 @@ const StockSearch = props => {
   const renderSearchedStocks = ({item, index}) => {
     const StockIndex = selectedStocksList.findIndex(val => val == item);
 
+    console.log('item.Category', item.Category);
     return (
       <>
         <View
@@ -109,7 +109,7 @@ const StockSearch = props => {
             }}>
             <Text
               style={{
-                backgroundColor: item.Category == 'NSE' ? '#f9e7e7' : '#e6f0fd',
+                backgroundColor: item.EXCHANGE == 'NSE' ? '#f9e7e7' : '#e6f0fd',
                 padding: 5,
                 fontSize: 12,
                 color: item?.EXCHANGE == 'NSE' ? '#d15753' : '#4983e1',

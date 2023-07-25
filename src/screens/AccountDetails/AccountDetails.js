@@ -14,7 +14,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import Icons from '../../../constants/Icons';
 import Images from '../../../constants/Images';
 import ImageIcon from '../../../components/ImageIcon/ImageIcon';
-import {FlashList} from '@shopify/flash-list';
 import {COLORS} from '../../utils/Theme/Theme';
 import {color} from '@rneui/base';
 import {
@@ -126,7 +125,6 @@ const Account = () => {
           }}>
           {item.head}
         </Text>
-        {/* <FlashList */}
         <Animated.FlatList
           showsVerticalScrollIndicator={false}
           onScroll={handleScroll}
@@ -299,7 +297,6 @@ const Account = () => {
                 marginTop: 130,
                 paddingTop: 75,
               }}>
-              {/* <FlashList */}
               <Animated.FlatList
                 // onScroll={handleScroll}
                 // ref={ref}
@@ -475,7 +472,6 @@ const Account = () => {
                 marginTop: 130,
                 paddingTop: 75,
               }}>
-              {/* <FlashList */}
               <Animated.FlatList
                 // onScroll={handleScroll}
                 // ref={ref}

@@ -14,7 +14,6 @@ import Icons from '../../../constants/Icons';
 import ImageIcon from '../../../components/ImageIcon/ImageIcon';
 // import Separator from '../../../components/Separator';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {FlashList} from '@shopify/flash-list';
 // import {Modal} from 'react-native-paper';
 // import {COLORS} from '../../utils/Theme/Theme';
 // import {Modal} from '../../../components/Modal.tsx';
@@ -95,9 +94,9 @@ props.navigation.navigate(ACCOUNT_DETAILS)
             }}>
             <View>
               <Text style={{fontSize: 25, fontWeight: 'normal'}}>
-                {UserData.name}
+                {UserData?.name}
               </Text>
-              <Text style={styles.grayText}>{UserData.ID}</Text>
+              <Text style={styles.grayText}>{UserData?.ID}</Text>
             </View>
             <View
               style={{
@@ -167,7 +166,7 @@ props.navigation.navigate(ACCOUNT_DETAILS)
               }}>
               <Text style={styles.grayText}>E-mail</Text>
 
-              <Text style={{fontSize: 16}}> {UserData.email}</Text>
+              <Text style={{fontSize: 16}}> {UserData?.email}</Text>
             </View>
             <View
               style={{
@@ -177,7 +176,7 @@ props.navigation.navigate(ACCOUNT_DETAILS)
               }}>
               <Text style={styles.grayText}>Phone</Text>
 
-              <Text style={{fontSize: 16}}> {UserData.phone}</Text>
+              <Text style={{fontSize: 16}}> {UserData?.phone}</Text>
             </View>
 
             <TouchableOpacity style={{paddingVertical: 10}}>
@@ -260,7 +259,7 @@ props.navigation.navigate(ACCOUNT_DETAILS)
                           borderRadius: 50,
                         }}
                       />
-                      <Text style={{fontSize: 16}}>{val.value}</Text>
+                      <Text style={{fontSize: 16}}>{val?.value}</Text>
                     </View>
                   );
                 })}

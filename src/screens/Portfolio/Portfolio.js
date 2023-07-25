@@ -1,41 +1,63 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import BottomSheet from 'react-native-bottomsheet-reanimated';
+// import { View, Text } from 'react-native'
+// import React from 'react'
 
-const Portfolio = () => {
+// const Portfolio = () => {
+//   return (
+//     <View style={{
+//       flex:1
+//     }}>
+//       <Text>Portfolio</Text>
+//     </View>
+//   )
+// }
+
+// export default Portfolio
+
+// import {StatusBar} from 'expo-status-bar';
+import React, {useCallback, useRef} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import BottomSheet from './BottomSheet';
+
+export default function Portfolio() {
+  const ref = useRef (null);
+
+  const onPress = useCallback(() => {
+    const isActive = ref?.current?.isActive();
+    if (isActive) {
+      ref?.current?.scrollTo(0);
+    } else {
+      ref?.current?.scrollTo(-200);
+    }
+  }, []);
+
   return (
-    // <View>
-    //   <Text>Portfolio</Text>
-    // </View>
-    <View style={styles.container}>
-      <BottomSheet
-        keyboardAware
-        bottomSheerColor="#FFFFFF"
-        ref="BottomSheet"
-        initialPosition={'50%'} //200, 300
-        snapPoints={['50%', '100%']}
-        isBackDrop={true}
-        isBackDropDismissByPress={true}
-        isRoundBorderWithTipHeader={true}
-        // backDropColor="red"
-        // isModal
-        // containerStyle={{backgroundColor:"red"}}
-        // tipStyle={{backgroundColor:"red"}}
-        // headerStyle={{backgroundColor:"red"}}
-        // bodyStyle={{backgroundColor:"red",flex:1}}
-        header={
-          <View>
-            <Text style={styles.text}>Header</Text>
-          </View>
-        }
-        body={
-          <View style={styles.body}>
-            <Text style={styles.text}>Body</Text>
-          </View>
-        }
-      />
-    </View>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <View style={styles.container}>
+      
+        {/* <StatusBar style="light" /> */}
+        <TouchableOpacity style={styles.button} onPress={onPress} />
+        <BottomSheet ref={ref}>
+          <View style={{flex: 1, backgroundColor: 'orange'}} />
+        </BottomSheet>
+      </View>
+    </GestureHandlerRootView>
   );
 }
 
-export default Portfolio
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#111',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    height: 50,
+    borderRadius: 25,
+    aspectRatio: 1,
+    backgroundColor: 'white',
+    opacity: 0.6,
+  },
+});
+

@@ -100,6 +100,24 @@ const BottomTabNavigator = () => {
           ),
         }}
       />
+      <Tab.Screen
+        name={ACCOUNT_DETAILS}
+        component={AccountDetails}
+        options={{
+          title: 'LJS128',
+          headerShown: false,
+          tabBarIcon: ({focused, size, color}) => (
+            <ImageIcon
+              icon={Icons.user}
+              iconStyle={{
+                height: 30,
+                width: 30,
+                tintColor: focused ? '#21a3f1' : COLORS.gray60,
+              }}
+            />
+          ),
+        }}
+      />
 
       {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
     </Tab.Navigator>

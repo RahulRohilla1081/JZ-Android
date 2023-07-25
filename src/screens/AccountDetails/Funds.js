@@ -10,7 +10,6 @@ import {
 import React, {useState, useRef} from 'react';
 
 import Icons from '../../../constants/Icons';
-import {FlashList} from '@shopify/flash-list';
 import {color} from '@rneui/base';
 // import {COLORS} from '../../../Theme/Theme';
 // import CustomButton from '../../../components/CustomButton';
@@ -176,8 +175,8 @@ const Funds = (props) => {
           <View
             style={{height: 1, backgroundColor: COLORS.gray10, margin: 20}}
           />
-          {/* <FlashList */}
-          <FlashList
+          {/* <FlatList */}
+          <FlatList
             showsVerticalScrollIndicator={false}
             data={tBody[0]}
             renderItem={renderHeaderTitle}
@@ -185,7 +184,7 @@ const Funds = (props) => {
           <View
             style={{height: 1, backgroundColor: COLORS.gray10, margin: 20}}
           />
-          <FlashList
+          <FlatList
             showsVerticalScrollIndicator={false}
             data={tBody[1]}
             renderItem={renderHeaderTitle}

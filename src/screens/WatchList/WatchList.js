@@ -16,13 +16,13 @@ import React, {useState, useEffect, useRef, memo, useCallback} from 'react';
 import Icons from '../../../constants/Icons';
 import Images from '../../../constants/Images';
 import ImageIcon from '../../../components/ImageIcon/ImageIcon';
-// import {FlashList} from '@shopify/flash-list';
 import {COLORS} from '../../utils/Theme/Theme';
 import {color} from '@rneui/base';
 import {
   ACCOUNT_FUNDS,
   ACCOUNT_PROFILE,
   ACCOUNT_SETTING,
+  STOCK_CHART,
   STOCK_SEARCH,
 } from '../../utils/Routes/Routes';
 import {useNavigation} from '@react-navigation/native';
@@ -37,6 +37,8 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import Overview from '../../../components/Overview/Overview';
 import {connect} from 'react-redux';
 import AddStocksInWatchList from '../../redux/action/watchlistAction';
+import CustomButton from '../../../components/CustomButton/CustomButton';
+import {Card, DataTable, Surface} from 'react-native-paper';
 
 // import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -47,6 +49,7 @@ import AddStocksInWatchList from '../../redux/action/watchlistAction';
 
 const WatchList = props => {
   const [activeTab, setActiveTab] = useState(0);
+  const [selectedStockData, setSelectedStockData] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const scrollY = useRef(new Animated.Value(0));
   const navigation = useNavigation();
@@ -70,7 +73,6 @@ const WatchList = props => {
   const [funds, setFunds] = useState({equity: 10000});
 
   useEffect(() => {
-
     // {
     //   USER_ID: 'JZ00001',
     //   data: {
@@ -216,11 +218,11 @@ const WatchList = props => {
           alignSelf: 'center',
         }}>
         <Image
-          source={Images.noDataFound}
+          source={Images.nothingHere}
           style={{
             marginTop: height / 7,
             height: 200,
-            width: 200,
+            width: 270,
           }}
         />
         <Text
@@ -454,6 +456,8 @@ const WatchList = props => {
             onPress={() => {
               // navigation.navigate(STOCK_CHART)
               ShowOptionButtonModal.current.open();
+              setSelectedStockData(item)
+
               // handleSheetChanges();
             }}>
             <View
@@ -503,7 +507,10 @@ const WatchList = props => {
   const MemoizedRenderStocks = memo(renderStockList);
 
   return (
-    <>
+    <View
+      style={{
+        flex: 1,
+      }}>
       <Overview
         animationHeight={animationHeight}
         onPress={() => {
@@ -727,7 +734,7 @@ const WatchList = props => {
         ref={ShowOptionButtonModal}
         closeOnDragDown={true}
         closeOnPressMask={true}
-        height={height / 2}
+        height={height / 1.3}
         onOpen={() => setShowOptionButtonModalStatusColorFlag(true)}
         onClose={() => setShowOptionButtonModalStatusColorFlag(false)}
         customStyles={{
@@ -735,20 +742,180 @@ const WatchList = props => {
             backgroundColor: 'transparent',
             backgroundColor: 'rgba(52, 52, 52, 0.4)',
           },
-          // draggableIcon: {
-          //   backgroundColor: COLORS.gray10,
-          //   width: width,
-          // },
+          draggableIcon: {
+            backgroundColor: COLORS.white,
+            width: width,
+          },
         }}>
-        <View
+        <Card
           style={{
-            backgroundColor: COLORS.gray10,
+            backgroundColor: COLORS.white,
+            marginVertical: 10,
           }}>
-          <Text>NIFTY 50</Text>
-          <Text>INDICES</Text>
-        </View>
+          <View
+            style={{
+              margin: 10,
+            }}>
+            <Text style={styles.modalHeader}>{selectedStockData?.SYMBOL}</Text>
+            <Text>NSE 2740.75</Text>
+          </View>
+        </Card>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{
+            backgroundColor: COLORS.white,
+            marginHorizontal: 10,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <CustomButton
+              color="#4185f4"
+              label="BUY"
+              style={{width: '47%'}}
+              onPress={() => {
+                // props.navigation.navigate(DASHBOARD);
+              }}
+            />
+            <CustomButton
+              color="#df514d"
+              label="SELL"
+              style={{width: '47%'}}
+              onPress={() => {
+                // props.navigation.navigate(DASHBOARD);
+              }}
+            />
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+              margin: 20,
+            }}>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+              }}
+              onPress={() => {
+                navigation.navigate(STOCK_CHART, {
+                  STOCK_SYMBOL: selectedStockData?.SYMBOL,
+                });
+              }}>
+              <ImageIcon
+                icon={Icons.three_vertical_line}
+                iconStyle={{
+                  height: 20,
+                  width: 20,
+                  tintColor: '#3f85f3',
+                }}
+              />
+              <Text
+                style={{
+                  color: '#3f85f3',
+                  fontSize: 15,
+                  marginHorizontal: 10,
+                }}>
+                View Chart
+              </Text>
+              <ImageIcon
+                icon={Icons.arrow_right}
+                iconStyle={{
+                  height: 20,
+                  width: 20,
+                  tintColor: '#3f85f3',
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              // alignItems: 'center',
+              // margin: 20,
+              justifyContent: 'space-between',
+            }}>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+              }}>
+              <ImageIcon
+                icon={Icons.notification}
+                iconStyle={{
+                  height: 20,
+                  width: 20,
+                  tintColor: '#3f85f3',
+                }}
+              />
+              <Text
+                style={{
+                  color: '#3f85f3',
+                  fontSize: 15,
+                  marginHorizontal: 10,
+                }}>
+                Create Alert
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+              }}>
+              <ImageIcon
+                icon={Icons.info}
+                iconStyle={{
+                  height: 20,
+                  width: 20,
+                  tintColor: '#3f85f3',
+                }}
+              />
+              <Text
+                style={{
+                  color: '#3f85f3',
+                  fontSize: 15,
+                  marginHorizontal: 10,
+                }}>
+                Create GTT
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.divider} />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+            }}>
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <Text style={styles.textHeaderModal}>Open</Text>
+              <Text style={styles.priceTextModal}> 2750.22</Text>
+            </View>
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <Text style={styles.textHeaderModal}>High</Text>
+              <Text style={styles.priceTextModal}> 2750.22</Text>
+            </View>
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <Text style={styles.textHeaderModal}>Low</Text>
+              <Text style={styles.priceTextModal}> 2750.22</Text>
+            </View>
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <Text style={styles.textHeaderModal}>Prev. close</Text>
+              <Text style={styles.priceTextModal}> 2750.22</Text>
+            </View>
+          </View>
+        </ScrollView>
       </RBSheet>
-    </>
+    </View>
   );
 };
 
@@ -762,6 +929,11 @@ const styles = StyleSheet.create({
     flex: 0.7,
     justifyContent: 'center',
   },
+  divider: {
+    height: 1,
+    backgroundColor: COLORS.gray,
+    margin: 10,
+  },
   title: {
     fontWeight: '800',
     fontSize: 28,
@@ -773,6 +945,12 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: COLORS.gray60,
     fontWeight: 800,
+    // margin:10
+  },
+  modalHeader: {
+    fontSize: 18,
+    color: COLORS.gray60,
+    // fontWeight: 700,
     // margin:10
   },
 
@@ -810,6 +988,13 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary1,
     paddingVertical: 20,
     minHeight: 80,
+  },
+  priceTextModal: {
+    color: COLORS.black,
+    fontSize: 14,
+  },
+  textHeaderModal: {
+    fontSize: 13,
   },
 });
 const mapStateToProps = state => ({

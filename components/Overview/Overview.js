@@ -4,6 +4,8 @@ import ImageIcon from '../ImageIcon/ImageIcon';
 import Icons from '../../constants/Icons';
 import IconButton from '../IconButton/IconButton';
 import { COLORS } from '../../src/utils/Theme/Theme';
+import WebView from 'react-native-webview';
+
 
 // import Icons from '../../constants/Icons';
 // import ImageIcon from '../ImageIcon/ImageIcon';
@@ -11,6 +13,30 @@ import { COLORS } from '../../src/utils/Theme/Theme';
 // import {COLORS} from '../../Theme/Theme';
 
 const Overview = ({animationHeight, onPress}) => {
+   const NIFTY_HTML = `<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://in.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+  {
+  "symbol": "FX:EURUSD",
+  "width": 370,
+  "height": 200,
+  "locale": "in",
+  "dateRange": "12M",
+  "colorTheme": "light",
+  "trendLineColor": "rgba(109, 158, 235, 1)",
+  "underLineColor": "rgba(242, 242, 242, 1)",
+  "underLineBottomColor": "rgba(238, 238, 238, 0)",
+  "isTransparent": true,
+  "autosize": false,
+  "largeChartUrl": "",
+  "chartOnly": false,
+  "noTimeScale": true
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->`;
   const [niftyFifty, setNiftyFifty] = useState({
     value: 18688.1,
     changeToday: -67.8,
@@ -59,13 +85,19 @@ const Overview = ({animationHeight, onPress}) => {
               {niftyFifty.changeToday} {'      '}
               {niftyFifty.changeTodayPercent}%
             </Text>
-            <View style={{marginTop: 20, marginLeft: 20}}>
-              <ImageIcon
+            <View
+              style={{marginTop: 20, height: 80, width: 100}}>
+              {/* <ImageIcon
                 icon={Icons.line_chart}
                 iconStyle={{
                   height: 40,
                   width: 50,
                 }}
+              /> */}
+              <WebView
+                source={{html: NIFTY_HTML}}
+                scalesPageToFit={true}
+                scrollEnabled={false}
               />
             </View>
           </View>
@@ -78,13 +110,19 @@ const Overview = ({animationHeight, onPress}) => {
               {niftyFifty.changeToday} {'      '}
               {niftyFifty.changeTodayPercent}%
             </Text>
-            <View style={{marginTop: 20, marginLeft: 20}}>
-              <ImageIcon
+            <View
+              style={{marginTop: 20, marginLeft: 20, height: 80, width: 100}}>
+              {/* <ImageIcon
                 icon={Icons.line_chart}
                 iconStyle={{
                   height: 40,
                   width: 50,
                 }}
+              /> */}
+              <WebView
+                source={{html: NIFTY_HTML}}
+                scalesPageToFit={true}
+                scrollEnabled={false}
               />
             </View>
           </View>
