@@ -11,7 +11,8 @@ export const COLORS = {
   green: '#71a976',
   white: '#fff',
   gray: '#c8c8c8',
-  gray20:"#b1b1b1"
+  gray20: '#b1b1b1',
+  BlueHighLighter: '#4581e5',
 };
 
 export const SIZES = {

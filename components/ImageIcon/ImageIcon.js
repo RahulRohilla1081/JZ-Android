@@ -8,7 +8,7 @@ import {
 
 const ImageIcon = ({containerStyle, icon, iconStyle, onPress}) => {
   return (
-    <TouchableWithoutFeedback style={{...containerStyle}} onPress={onPress}>
+    // <TouchableWithoutFeedback style={{...containerStyle}} onPress={onPress}>
       <Image
         source={icon}
         resizeMode="contain"
@@ -19,7 +19,7 @@ const ImageIcon = ({containerStyle, icon, iconStyle, onPress}) => {
           ...iconStyle,
         }}
       />
-    </TouchableWithoutFeedback>
+    // </TouchableWithoutFeedback>
   );
 };
 

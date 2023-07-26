@@ -17,6 +17,7 @@ import AccountDetails from '../../screens/AccountDetails/AccountDetails';
 import Orders from '../../screens/Orders/Orders';
 import {COLORS} from '../../utils/Theme/Theme';
 import {Text} from 'react-native';
+import CustomBottomTabBar from './CustomBottomTabBar';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +39,9 @@ const BottomTabNavigator = () => {
         },
         tabBarActiveTintColor: COLORS.activeBlue,
         tabBarInactiveTintColor: 'gray',
-      })}>
+      })}
+      tabBar={props => <CustomBottomTabBar {...props} />}
+      >
       {/* <Tab.Screen
         name={HOME}
         component={Dashboard}

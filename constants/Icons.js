@@ -30,6 +30,7 @@ const chart_iq = require('../assets/icons/chart_iq.png');
 const line_chart = require('../assets/icons/line-chart.png');
 const three_vertical_line = require('../assets/icons/three-vertical-line.png');
 const arrow_right = require('../assets/icons/arrow-right.png');
+const contract = require('../assets/icons/contract.png');
 
 export default {
   watch_list,
@@ -64,4 +65,5 @@ export default {
   line_chart,
   three_vertical_line,
   arrow_right,
+  contract,
 };

@@ -63,9 +63,9 @@ const Account = () => {
     {
       head: 'Support',
       list: [
-        {title: 'Support Portal', icon: Icons.info},
-        {title: 'User Manual', icon: Icons.question},
-        {title: 'Contact', icon: Icons.telephone},
+        {title: 'Support Portal', icon: Icons.info, route: ACCOUNT_FUNDS},
+        {title: 'User Manual', icon: Icons.question, route: ACCOUNT_FUNDS},
+        {title: 'Contact', icon: Icons.telephone, route: ACCOUNT_FUNDS},
       ],
     },
   ];
@@ -243,7 +243,7 @@ const Account = () => {
                 // {transform: [{translateY}]},
               ]}>
               <Text
-                style={{fontSize: 30, fontWeight: 'bold', color: '#373644'}}>
+                style={{fontSize: 24, fontWeight: 'bold', color: '#373644'}}>
                 Account
               </Text>
               {/* <TouchableOpacity
