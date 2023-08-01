@@ -25,7 +25,7 @@ const Stack = createNativeStackNavigator();
 function StackNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={DASHBOARD}>
+      <Stack.Navigator initialRouteName={WELCOME}>
         <Stack.Screen
           name={LOGIN}
           component={Login}

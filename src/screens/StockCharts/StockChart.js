@@ -15,7 +15,7 @@ const [RenderStockTradingViewChart, setRenderStockTradingViewChart] = useState(
 );
 
   const {width,height}=useWindowDimensions()
-  console.log(props.route.params.STOCK_SYMBOL);
+  console.log("asdasdjb",props.route.params.STOCK_SYMBOL);
    const HTML =
      "<html><head><meta name='viewport' content='width=device-width, initial-scale=1'><script type='text/javascript' src='https://s3.tradingview.com/tv.js'></script></head><body style='margin: auto;width:100%;'><div id='tradingview-widget-container'></div><script type='text/javascript'>;new TradingView.widget({'width':" +
      width +

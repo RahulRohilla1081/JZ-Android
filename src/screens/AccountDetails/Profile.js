@@ -12,13 +12,8 @@ import React, {useState, useEffect, useRef} from 'react';
 
 import Icons from '../../../constants/Icons';
 import ImageIcon from '../../../components/ImageIcon/ImageIcon';
-// import Separator from '../../../components/Separator';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-// import {Modal} from 'react-native-paper';
-// import {COLORS} from '../../utils/Theme/Theme';
-// import {Modal} from '../../../components/Modal.tsx';
-import {color} from '@rneui/base';
-// import {COLORS} from '../../../Theme/Theme';
+
 import Separator from '../../../components/Separator/Separator';
 import { COLORS } from '../../utils/Theme/Theme';
 import { Modal } from '../../../components/ProfileModal/Modal';
