@@ -31,6 +31,12 @@ const line_chart = require('../assets/icons/line-chart.png');
 const three_vertical_line = require('../assets/icons/three-vertical-line.png');
 const arrow_right = require('../assets/icons/arrow-right.png');
 const contract = require('../assets/icons/contract.png');
+const arrow_right_no_stock = require('../assets/icons/arrow-right-no-stick.png');
+const cross_light = require('../assets/icons/cross-light.png');
+const refresh = require('../assets/icons/refresh.png');
+const smartphone_call = require('../assets/icons/smartphone-call.png');
+const radio_unchecked = require('../assets/icons/radio-unchecked.png');
+const radio_checked = require('../assets/icons/radio-checked.png');
 
 export default {
   watch_list,
@@ -66,4 +72,10 @@ export default {
   three_vertical_line,
   arrow_right,
   contract,
+  arrow_right_no_stock,
+  cross_light,
+  refresh,
+  smartphone_call,
+  radio_unchecked,
+  radio_checked,
 };

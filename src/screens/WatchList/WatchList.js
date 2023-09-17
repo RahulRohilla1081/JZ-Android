@@ -22,6 +22,7 @@ import {
   ACCOUNT_FUNDS,
   ACCOUNT_PROFILE,
   ACCOUNT_SETTING,
+  STOCK_BUY_SELL,
   STOCK_CHART,
   STOCK_SEARCH,
 } from '../../utils/Routes/Routes';
@@ -73,6 +74,8 @@ const WatchList = props => {
   const [funds, setFunds] = useState({equity: 10000});
 
   useEffect(() => {
+
+    console.log("props.WATCH_LIST_1asd",props.WATCH_LIST_1);
     // {
     //   USER_ID: 'JZ00001',
     //   data: {
@@ -162,7 +165,7 @@ const WatchList = props => {
       },
     ],
     {
-      useNativeDriver: true,
+      useNativeDriver: false,
     },
   );
   const scrollYClamped = Animated.diffClamp(scrollY.current, 0, headerHeight);
@@ -456,7 +459,7 @@ const WatchList = props => {
             onPress={() => {
               // navigation.navigate(STOCK_CHART)
               ShowOptionButtonModal.current.open();
-              setSelectedStockData(item)
+              setSelectedStockData(item);
 
               // handleSheetChanges();
             }}>
@@ -597,6 +600,7 @@ const WatchList = props => {
                   showsVerticalScrollIndicator={false}
                   tabBarUnderlineStyle={{
                     backgroundColor: COLORS.primary,
+                    borderRadius: 20,
                     // flex:1
                   }}>
                   {tabs.map((tab, index) => buildTab(tab, index))}
@@ -703,6 +707,7 @@ const WatchList = props => {
                   showsVerticalScrollIndicator={false}
                   tabBarUnderlineStyle={{
                     backgroundColor: COLORS.primary,
+                    borderRadius: 20,
                     // flex:1
                   }}>
                   {tabs.map((tab, index) => buildTab(tab, index))}
@@ -772,19 +777,21 @@ const WatchList = props => {
               justifyContent: 'space-between',
             }}>
             <CustomButton
-              color="#4185f4"
+              color={COLORS.buy}
               label="BUY"
               style={{width: '47%'}}
               onPress={() => {
-                // props.navigation.navigate(DASHBOARD);
+                 ShowOptionButtonModal.current.close();
+                props.navigation.navigate(STOCK_BUY_SELL, {PAGE_TYPE: 'BUY'});
               }}
             />
             <CustomButton
-              color="#df514d"
+              color={COLORS.sell}
               label="SELL"
               style={{width: '47%'}}
               onPress={() => {
-                // props.navigation.navigate(DASHBOARD);
+                ShowOptionButtonModal.current.close();
+                props.navigation.navigate(STOCK_BUY_SELL, {PAGE_TYPE: 'SELL'});
               }}
             />
           </View>

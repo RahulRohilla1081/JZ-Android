@@ -164,7 +164,7 @@ const Orders = (props) => {
       },
     ],
     {
-      useNativeDriver: true,
+      useNativeDriver: false,
     },
   );
   const scrollYClamped = Animated.diffClamp(scrollY.current, 0, headerHeight);
@@ -663,6 +663,7 @@ const Orders = (props) => {
                   showsVerticalScrollIndicator={false}
                   tabBarUnderlineStyle={{
                     backgroundColor: COLORS.primary,
+                    borderRadius: 20,
                     // flex:1
                   }}>
                   {tabs.map((tab, index) => buildTab(tab, index))}
@@ -769,6 +770,7 @@ const Orders = (props) => {
                   showsVerticalScrollIndicator={false}
                   tabBarUnderlineStyle={{
                     backgroundColor: COLORS.primary,
+                    borderRadius: 20,
                     // flex:1
                   }}>
                   {tabs.map((tab, index) => buildTab(tab, index))}

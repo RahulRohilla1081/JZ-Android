@@ -719,6 +719,7 @@ const Portfolio = props => {
                   showsVerticalScrollIndicator={false}
                   tabBarUnderlineStyle={{
                     backgroundColor: COLORS.primary,
+                    borderRadius: 20,
                     // flex:1
                   }}>
                   {tabs.map((tab, index) => buildTab(tab, index))}
@@ -825,6 +826,7 @@ const Portfolio = props => {
                   showsVerticalScrollIndicator={false}
                   tabBarUnderlineStyle={{
                     backgroundColor: COLORS.primary,
+                    borderRadius: 20,
                     // flex:1
                   }}>
                   {tabs.map((tab, index) => buildTab(tab, index))}

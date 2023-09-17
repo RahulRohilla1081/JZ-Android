@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
+// import Animated from 'react-native-reanimated';
 
 import Icons from '../../../constants/Icons';
 import Images from '../../../constants/Images';
@@ -76,12 +77,16 @@ const Account = () => {
       Animated.timing(animationHeight, {
         duration: 100,
         toValue: 0.55 * height,
+        useNativeDriver: false,
+
         // easing: Easing.linear,
       }).start();
     } else {
       Animated.timing(animationHeight, {
-        duration: 200,
+        duration: 100,
         toValue: 0,
+        useNativeDriver: false,
+
         // easing: Easing.linear,
       }).start();
     }
@@ -95,7 +100,7 @@ const Account = () => {
       },
     ],
     {
-      useNativeDriver: true,
+      useNativeDriver: false,
     },
   );
   const scrollYClamped = Animated.diffClamp(scrollY.current, 0, headerHeight);
@@ -153,7 +158,9 @@ const Account = () => {
         )}
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate(item.route);
+            setTimeout(() => {
+              navigation.navigate(item.route);
+            }, 20);
           }}>
           <View
             style={{

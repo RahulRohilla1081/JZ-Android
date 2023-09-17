@@ -11,3 +11,4 @@ export const STOCK_SEARCH = 'v1/stock-search';
 export const ACCOUNT_FUNDS = 'v1/account-funds';
 export const ACCOUNT_PROFILE = 'v1/account-profile';
 export const ACCOUNT_SETTING = 'v1/account-setting';
+export const STOCK_BUY_SELL = 'v1/stock-buy-sell';

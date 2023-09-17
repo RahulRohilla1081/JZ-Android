@@ -11,6 +11,7 @@ import {
   ACCOUNT_FUNDS,
   ACCOUNT_PROFILE,
   ACCOUNT_SETTING,
+  STOCK_BUY_SELL,
 } from '../../utils/Routes/Routes';
 import BottomTabNavigator from '../BottomTab/BottomTabNavigator';
 import StockChart from '../../screens/StockCharts/StockChart';
@@ -20,12 +21,13 @@ import StockSearch from '../../screens/StockSearch/StockSearch';
 import Funds from '../../screens/AccountDetails/Funds';
 import Profile from '../../screens/AccountDetails/Profile';
 import AccountSettings from '../../screens/AccountDetails/Settings';
+import StockBuySell from '../../screens/StockBuySell/StockBuySell';
 
 const Stack = createNativeStackNavigator();
 function StackNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={WELCOME}>
+      <Stack.Navigator initialRouteName={STOCK_BUY_SELL}>
         <Stack.Screen
           name={LOGIN}
           component={Login}
@@ -64,6 +66,11 @@ function StackNavigator() {
         <Stack.Screen
           name={ACCOUNT_SETTING}
           component={AccountSettings}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={STOCK_BUY_SELL}
+          component={StockBuySell}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

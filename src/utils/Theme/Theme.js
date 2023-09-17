@@ -2,6 +2,8 @@
 export const COLORS = {
   primary: '#3c7eea',
   primary1: '#EBECEE',
+  secondary: '#df514d',
+  secondaryLight: '#f2b4b2',
   gray60: '#666666',
   gray10: '#E5E5E5',
   activeBlue: '#B2CDF2',
@@ -13,6 +15,9 @@ export const COLORS = {
   gray: '#c8c8c8',
   gray20: '#b1b1b1',
   BlueHighLighter: '#4581e5',
+  BarGray: '#ebecee',
+  sell: '#df514d',
+  buy: '#4185f4',
 };
 
 export const SIZES = {
